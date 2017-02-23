@@ -33,6 +33,35 @@ class Server extends WebSocketServer {
                     $this->send($user, json_encode(array(4, $player->getState())));
                 }
                 break;
+            //Move
+            case 2:
+                $player = $this->instance->move($user);
+                if ($player != NULL) {
+                    $this->send($user, json_encode(array(4, $player->getState())));
+                }
+                break;
+            //Attack
+            case 3:
+                $player = $this->instance->attack($user);
+                if ($player != NULL) {
+                    $this->send($user, json_encode(array(4, $player->getState())));
+                }
+                break;
+            //Game
+            case 4:
+                $player = $this->instance->game($user);
+                if ($player != NULL) {
+                    $this->send($user, json_encode(array(4, $player->getState())));
+                }
+                break;
+            //Score
+            case 5:
+                $player = $this->instance->score($user);
+                if ($player != NULL) {
+                    $this->send($user, json_encode(array(4, $player->getState())));
+                    $this->send($this->instance->getPlayer()->getUser(), json_encode(array(4, $this->instance->getPlayer()->getState()))); 
+                }
+                break;
         }
     }
 

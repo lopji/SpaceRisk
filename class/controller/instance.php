@@ -23,6 +23,7 @@ class Instance {
         $this->step++;
         $idPlayer = $this->step % $this->config->server_info["nbPlayer"];
         $this->player = $this->players[$idPlayer];
+        $this->player->setState(0);
     }
 
     public function deployment($user, $troop) {
@@ -31,6 +32,39 @@ class Instance {
             if ($player->deployment($troop)) {
                 $player->setState(1);
             }
+        }
+        return $player;
+    }
+
+    public function move($user) {
+        $player = $this->getPlayerByUser($user);
+        if ($this->player->getId() == $player->getId() && $this->player->getState() == 1) {
+            $player->setState(2);
+        }
+        return $player;
+    }
+
+    public function attack($user) {
+        $player = $this->getPlayerByUser($user);
+        if ($this->player->getId() == $player->getId() && $this->player->getState() == 2) {
+            $player->setState(3);
+        }
+        return $player;
+    }
+
+    public function game($user) {
+        $player = $this->getPlayerByUser($user);
+        if ($this->player->getId() == $player->getId() && $this->player->getState() == 3) {
+            $player->setState(4);
+        }
+        return $player;
+    }
+
+    public function score($user) {
+        $player = $this->getPlayerByUser($user);
+        if ($this->player->getId() == $player->getId() && $this->player->getState() == 4) {
+            $player->setState(5);
+            $this->nextPlayer();
         }
         return $player;
     }
@@ -56,8 +90,8 @@ class Instance {
         }
         return $player;
     }
-    
-    public function getRound(){
+
+    public function getRound() {
         return $this->step / $this->config->server_info["nbPlayer"];
     }
 
@@ -68,6 +102,10 @@ class Instance {
             }
         }
         return NULL;
+    }
+
+    public function getPlayer() {
+        return $this->player;
     }
 
     public function __toString() {

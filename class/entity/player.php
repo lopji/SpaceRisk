@@ -62,6 +62,10 @@ class Player {
     public function getId() {
         return $this->id;
     }
+    
+    public function getUser(){
+        return $this->user;
+    }
 
     public function __toString() {
         $connected = ($this->connected) ? 'TRUE' : 'FALSE';
