@@ -28,11 +28,6 @@
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="js/ie-emulation-modes-warning.js"></script>
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
   </head>
 
   <body>
@@ -88,10 +83,10 @@
           <div class="sidebar-module">
             <h4>Chat</h4>
             <ol class="list-unstyled" id="chat">
-              <li style="color:green;">Fucking faggot fuck off</li>
-              <li style="color:red;">Shut up kill yourself</li>
-              <li style="color:blue;">You retarded noob why did you deploy here</li>
-              <li style="color:red;">I hate every single one of you</li>
+              <li style="color:green;">Lama</li>
+              <li style="color:red;">Dark Magenta</li>
+              <li style="color:blue;">Yo</li>
+              <li style="color:red;">Blou</li>
             </ol>
             <form class="form-inline">
                 <div class="form-group">
@@ -107,7 +102,7 @@
           </div>
         </div><!-- /.blog-sidebar -->
         </div><!-- /.row -->
-        <div class="row">           
+        <div class="row">
             <div class="text-center">
               <div class="col-md-2 col-md-offset-1">
               <svg xmlns="http://www.w3.org/2000/svg">
@@ -126,9 +121,6 @@
                 <svg xmlns="http://www.w3.org/2000/svg">
                     <circle id="d" cx="30" cy="30" r="25" stroke="black" stroke-width="4" fill="white" />
                 </svg></div>
-          </div>
-            </div>
-        </div>
        </div><!-- /.container -->
 
     <footer class="footer">
