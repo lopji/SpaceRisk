@@ -8,10 +8,9 @@ and open the template in the editor.
     <head>
         <meta charset="UTF-8">
         <title></title>
+        <script src="./javascript/client.js"></script>
     </head>
     <body>
-        <?php
-        // put your code here
-        ?>
+        <p>Welcome</p>
     </body>
 </html>

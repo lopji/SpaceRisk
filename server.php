@@ -1,8 +1,27 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+require_once('./library/websocket/websockets.php');
 
+class Server extends WebSocketServer {
+
+    protected function process($user, $message) {
+        $this->send($user, $message);
+    }
+
+    protected function connected($user) {
+        
+    }
+
+    protected function closed($user) {
+        
+    }
+
+}
+
+$server = new Server("0.0.0.0", "666");
+
+try {
+    $server->run();
+} catch (Exception $e) {
+    $server->stdout($e->getMessage());
+}
