@@ -20,7 +20,7 @@ class Server extends WebSocketServer {
                 $player = $this->instance->login($user, $data[1]);
                 if ($player != NULL) {
                     $this->sendAll(json_encode(array(0, $player->getId())));
-                    $this->send($user, json_encode(array(3, $this->instance->getRound())));
+                    $this->send($user, json_encode(array(3, $this->instance->getPlayers())));
                     $this->send($user, json_encode(array(4, $player->getState())));
                 } else {
                     $this->send($user, json_encode(array(2)));
