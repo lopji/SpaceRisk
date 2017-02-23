@@ -104,10 +104,25 @@
           </div>
         </div><!-- /.blog-sidebar -->
         </div><!-- /.row -->
-        <div class="row">
-            <div class="col-md-10">
-                <div class="text-center">
-              <img src="./res/footbar.png" alt="foot">
+        <div class="row">           
+            <div class="text-center">
+              <div class="col-md-2 col-md-offset-1">
+              <svg xmlns="http://www.w3.org/2000/svg">
+                    <circle id="a" cx="30" cy="30" r="25" stroke="black" stroke-width="4" fill="white" />
+                </svg>
+              </div>
+                 <div class="col-md-2">
+                <svg xmlns="http://www.w3.org/2000/svg">
+                    <circle id="b" cx="30" cy="30" r="25" stroke="black" stroke-width="4" fill="white" />
+                </svg>
+                 </div><div class="col-md-2">
+                <svg xmlns="http://www.w3.org/2000/svg">
+                    <circle id="c" cx="30" cy="30" r="25" stroke="black" stroke-width="4" fill="white" />
+                </svg>
+                 </div><div class="col-md-2">
+                <svg xmlns="http://www.w3.org/2000/svg">
+                    <circle id="d" cx="30" cy="30" r="25" stroke="black" stroke-width="4" fill="white" />
+                </svg></div>
           </div>
             </div>
         </div>
