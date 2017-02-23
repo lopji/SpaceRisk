@@ -47,10 +47,10 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li  ><a href="./index.php">Acceuil</a></li>
+            <li  ><a href="./index.php">Accueil</a></li>
             <li><a href="#about">Jouer</a></li>
             <li><a href="#contact">Règles</a></li>
-            <li class="active"><a  href="./about.php">Á propos</a></li>
+            <li class="active"><a  href="./about.php">A propos</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -61,7 +61,7 @@
       <div class="starter-template">
         <h1></h1>
         <p class="lead">
-            Projet Crée par :
+            Projet créé par :
 
         </p>
       </div>
