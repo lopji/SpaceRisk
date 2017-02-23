@@ -47,10 +47,10 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li  href="./index.php" ><a href="#">Acceuil</a></li>
+            <li  ><a href="./index.php">Acceuil</a></li>
             <li><a href="#about">Jouer</a></li>
             <li><a href="#contact">Règles</a></li>
-            <li><a class="active" href="./about.php">Á propos</a></li>
+            <li class="active"><a  href="./about.php">Á propos</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
