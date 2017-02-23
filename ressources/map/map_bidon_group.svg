@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Test SVG</title>
-  </head>
-  <body>
-    <button type="button"></button>
-    <svg
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
    xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -230,7 +225,7 @@
        rx="117.17771"
        ry="146.47214" />
     <g
-       id="g3486" class="toto">
+       id="g3486">
       <ellipse
          ry="30.714287"
          rx="32.857147"
@@ -247,7 +242,7 @@
          id="ellipse8720" />
     </g>
     <g
-       id="g3482" class="toto">
+       id="g3482">
       <ellipse
          ry="30.714289"
          rx="32.857151"
@@ -264,7 +259,7 @@
          id="ellipse8720-7" />
     </g>
     <g
-       id="g3478" class="toto">
+       id="g3478">
       <ellipse
          ry="27.192293"
          rx="29.089434"
@@ -281,7 +276,7 @@
          id="ellipse8720-9" />
     </g>
     <g
-       id="g3474" class="toto">
+       id="g3474">
       <ellipse
          ry="24.550797"
          rx="26.263647"
@@ -298,7 +293,7 @@
          id="ellipse8720-6" />
     </g>
     <g
-       id="g3466" class="toto">
+       id="g3466">
       <ellipse
          ry="27.632544"
          rx="29.5604"
@@ -315,7 +310,7 @@
          id="ellipse8720-2" />
     </g>
     <g
-       id="g3490" class="toto">
+       id="g3490">
       <ellipse
          ry="34.236282"
          rx="36.624866"
@@ -332,7 +327,7 @@
          id="ellipse8720-1" />
     </g>
     <g
-       id="g3470" class="toto">
+       id="g3470">
       <ellipse
          ry="16.626308"
          rx="17.786287"
@@ -355,27 +350,3 @@
      inkscape:label="ombres_planetes"
      style="display:inline" />
 </svg>
-
-    <script
-			  src="https://code.jquery.com/jquery-3.1.1.min.js"
-			  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-			  crossorigin="anonymous"></script>
-		<script type="text/javascript">
-			$('.toto').on({
-				mouseenter: function () {
-					$(this).children('ellipse:first').css('filter', 'url(#dropshadow)').css('stroke', '#ffffff');
-				},
-
-				mouseleave: function () {
-					$(this).children('ellipse:first').css('filter', '').css('stroke', '#000000');
-				}
-			});
-/*
-      $('#layer3 ellipse').mouseover(function(){
-        $(this).css('filter', 'url(#dropshadow)').css('stroke', '#ffffff');
-         //$('#layer4 ellipse').css('fill-opacity', '0');
-      });
-      */
-    </script>
-  </body>
-</html>
