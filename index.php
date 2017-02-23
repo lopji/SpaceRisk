@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -47,22 +46,27 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Acceuil</a></li>
+            <li class="active"><a href="#">Accueil</a></li>
             <li><a href="#about">Jouer</a></li>
             <li><a href="#contact">Règles</a></li>
-            <li><a href="#contact">Á propos</a></li>
+            <li><a href="#contact">A propos</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
 
     <div class="container">
-
       <div class="starter-template">
-        <h1></h1>
-        <p class="lead"></p>
+        <h1>Accueil SVG</h1>            
+        
+        <!-- Lors de la lecture du fichier svg directement 
+            il faut faire attention à ne pas avoir de balise xml 
+            et de retirer les lignes width et heights en tant qu'attribut de svg -->
+        <svg id="map" width="100%" height="650" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+            <?php include_once './ressources/map/map_bidon.svg'; ?>
+        </svg>
       </div>
-
     </div><!-- /.container -->
 
 
