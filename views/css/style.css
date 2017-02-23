@@ -19,3 +19,7 @@ body {
 .sidebar-module {
     border:solid 1px grey;
 }
+
+#greyPicture {
+  filter: grayscale(100%);
+}
