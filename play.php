@@ -1,4 +1,7 @@
+<?php
 
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -16,7 +19,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href=css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="style.css" rel="stylesheet">
@@ -72,7 +75,7 @@
                 </svg>
             </div>
         </div>
-    
+
     <div class="col-md-3 col-md-offset-1 blog-sidebar">
         <div class="sidebar-module">
             <h4>Objectifs</h4>
