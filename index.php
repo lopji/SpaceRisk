@@ -1,3 +1,6 @@
+<?php
+header("Location:play.php");
+ ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>

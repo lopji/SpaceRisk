@@ -1,7 +1,22 @@
 body {
   padding-top: 50px;
+  font-size:15px;
 }
+
 .starter-template {
   padding: 40px 15px;
   text-align: center;
+}
+
+#joueurs{
+    margin-top:20px;
+}
+
+#troupes {
+    margin-top:30px;
+    font-size:25px;
+}
+
+.sidebar-module {
+    border:solid 1px grey;
 }
