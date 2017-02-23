@@ -1,8 +1,75 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+class Player {
 
+    private $id;
+    private $user;
+    private $connected;
+    private $state;
+    private $troop;
+
+    public function __construct() {
+        $this->id = -1;
+        $this->user = null;
+        $this->connected = FALSE;
+        $this->state = 5;
+        $this->troop = 20;
+    }
+
+    public function login($id, $user) {
+        $this->id = $id;
+        $this->user = $user;
+        $this->connected = TRUE;
+    }
+
+    public function logout() {
+        $this->user = null;
+        $this->connected = FALSE;
+    }
+
+    public function deployment($troop) {
+        if ($this->troop == $troop) {
+            $troop = 0;
+            return TRUE;
+        } else if ($this->troop > $troop) {
+            $this->troop -= $troop;
+            return FALSE;
+        } else if ($this->troop < $troop) {
+            return FALSE;
+        }
+    }
+
+    public function checkUser($user) {
+        return $this->user->id == $user->id;
+    }
+
+    public function checkId($id) {
+        return $this->id == $id || $this->id == -1;
+    }
+
+    public function isConnected() {
+        return $this->connected;
+    }
+
+    public function setState($state) {
+        $this->state = $state;
+    }
+
+    public function getState() {
+        return $this->state;
+    }
+
+    public function getId() {
+        return $this->id;
+    }
+    
+    public function getUser(){
+        return $this->user;
+    }
+
+    public function __toString() {
+        $connected = ($this->connected) ? 'TRUE' : 'FALSE';
+        return "Connected: " . $connected . ";";
+    }
+
+}
