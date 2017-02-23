@@ -13,7 +13,7 @@ class Instance {
         $this->step = 0;
         $this->config = require_once('./config.php');
         for ($i = 0; $i < $this->config->server_info["nbPlayer"]; $i++) {
-            array_push($this->players, new Player());
+            array_push($this->players, new Player("Player " . $i));
         }
         $this->player = $this->players[0];
         $this->player->setState(0);
@@ -102,6 +102,14 @@ class Instance {
             }
         }
         return NULL;
+    }
+    
+    public function getPlayers(){
+        $array = [];
+        foreach ($this->players as $player) {
+            array_push($array, array($player->getId(), $player->getPseudo()));
+        }
+        return $array;
     }
 
     public function getPlayer() {

@@ -7,13 +7,15 @@ class Player {
     private $connected;
     private $state;
     private $troop;
+    private $pseudo;
 
-    public function __construct() {
+    public function __construct($pseudo) {
         $this->id = -1;
         $this->user = null;
         $this->connected = FALSE;
         $this->state = 5;
         $this->troop = 20;
+        $this->pseudo = $pseudo;
     }
 
     public function login($id, $user) {
@@ -65,6 +67,14 @@ class Player {
     
     public function getUser(){
         return $this->user;
+    }
+    
+    public function getPseudo(){
+        return $this->pseudo;
+    }
+    
+    public function getColor() {
+        return $this->color;
     }
 
     public function __toString() {
