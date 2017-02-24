@@ -41,6 +41,9 @@ function init() {
                 case 5:
                     $('#troop').html(data[1]);
                     break;
+                case 6:
+                    
+                    break;
             }
         };
         socket.onclose = function (msg) {

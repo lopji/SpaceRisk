@@ -22,6 +22,7 @@ class Server extends WebSocketServer {
                     $this->send($user, json_encode(array(3, $this->instance->getPlayers())));
                     $this->send($user, json_encode(array(4, $player->getState())));
                     $this->send($user, json_encode(array(5, $player->getTroop())));
+                    $this->send($user, json_encode(array(6, $this->instance->getTerritorysByPlayer($player))));
                 } else {
                     $this->send($user, json_encode(array(2)));
                 }
@@ -77,14 +78,12 @@ class Server extends WebSocketServer {
     }
 
     protected function connected($user) {
-        
+        $this->stdout($user->id);
     }
 
     protected function closed($user) {
-        $player = $this->instance->logout($user);
-        if ($player != NULL) {
-            $this->sendAll(json_encode(array(1, $player->getId())));
-        }
+        $player = $this->instance->getPlayerByUser($user);
+        $this->instance->logout($player);
     }
 
 }

@@ -31,18 +31,6 @@ class Player {
         $this->connected = FALSE;
     }
 
-    public function deployment($troop) {
-        if ($this->troop == $troop) {
-            $troop = 0;
-            return TRUE;
-        } else if ($this->troop > $troop) {
-            $this->troop -= $troop;
-            return FALSE;
-        } else if ($this->troop < $troop) {
-            return FALSE;
-        }
-    }
-
     public function checkUser($user) {
         return $this->user->id == $user->id;
     }

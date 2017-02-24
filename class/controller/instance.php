@@ -8,65 +8,18 @@ class Instance {
     private $players = array();
     private $player;
     private $step;
+    private $territorys = array();
 
     public function __construct() {
         $this->step = 0;
         $this->config = require_once('./config.php');
+        $this->territorys = require_once('./class/map/default.php');
         for ($i = 0; $i < $this->config->server_info["nbPlayer"]; $i++) {
             array_push($this->players, new Player("Player " . $i));
+            $this->territorys[$i]->setPlayer($this->players[$i]);
         }
         $this->player = $this->players[0];
         $this->player->setState(0);
-    }
-
-    public function nextPlayer() {
-        $this->step++;
-        $idPlayer = $this->step % $this->config->server_info["nbPlayer"];
-        $this->player = $this->players[$idPlayer];
-        $this->player->setState(0);
-    }
-
-    public function deployment($user, $troop) {
-        $player = $this->getPlayerByUser($user);
-        if ($this->player->getId() == $player->getId() && $this->player->getState() == 0) {
-            if ($player->deployment($troop)) {
-                $player->setState(1);
-            }
-        }
-        return $player;
-    }
-
-    public function move($user) {
-        $player = $this->getPlayerByUser($user);
-        if ($this->player->getId() == $player->getId() && $this->player->getState() == 1) {
-            $player->setState(2);
-        }
-        return $player;
-    }
-
-    public function attack($user) {
-        $player = $this->getPlayerByUser($user);
-        if ($this->player->getId() == $player->getId() && $this->player->getState() == 2) {
-            $player->setState(3);
-        }
-        return $player;
-    }
-
-    public function game($user) {
-        $player = $this->getPlayerByUser($user);
-        if ($this->player->getId() == $player->getId() && $this->player->getState() == 3) {
-            $player->setState(4);
-        }
-        return $player;
-    }
-
-    public function score($user) {
-        $player = $this->getPlayerByUser($user);
-        if ($this->player->getId() == $player->getId() && $this->player->getState() == 4) {
-            $player->setState(5);
-            $this->nextPlayer();
-        }
-        return $player;
     }
 
     public function state($player) {
@@ -87,13 +40,27 @@ class Instance {
                     break;
                 case 4:
                     $state = 5;
-                    $this->nextPlayer();
+                    $this->round();
                     break;
             }
         }
         $result = $state != $player->getState();
         $player->setState($state);
         return $result;
+    }
+
+    public function round() {
+        if ($this->step % $this->config->server_info["nbPlayer"] == 0) {
+            //New Round
+        }
+        $this->nextPlayer();
+    }
+
+    public function nextPlayer() {
+        $this->step++;
+        $idPlayer = $this->step % $this->config->server_info["nbPlayer"];
+        $this->player = $this->players[$idPlayer];
+        $this->player->setState(0);
     }
 
     public function login($user, $id) {
@@ -110,16 +77,10 @@ class Instance {
         return NULL;
     }
 
-    public function logout($user) {
-        $player = $this->getPlayerByUser($user);
+    public function logout($player) {
         if ($player != NULL) {
             $player->logout();
         }
-        return $player;
-    }
-
-    public function getRound() {
-        return $this->step / $this->config->server_info["nbPlayer"];
     }
 
     public function getPlayerByUser($user) {
@@ -129,6 +90,16 @@ class Instance {
             }
         }
         return NULL;
+    }
+
+    public function getTerritorysByPlayer($player) {
+        $array = [];
+        foreach ($this->territorys as $territory) {
+            if($player->checkId($territory->getPlayer()->getId())){
+                 array_push($array, $territory->getId());
+            }
+        }
+        return $array;
     }
 
     public function getPlayers() {

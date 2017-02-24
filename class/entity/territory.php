@@ -1,8 +1,28 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+class Territory {
 
+    private $id;
+    private $neighbours = array();
+    private $player;
+    private $troop;
+
+    public function __construct($id, $neighbours) {
+        $this->id = $id;
+        $this->neighbours = $neighbours;
+        $this->troop = 1;
+    }
+
+    public function getId(){
+        return $this->id;
+    }
+    
+    public function getPlayer() {
+        return $this->player;
+    }
+
+    public function setPlayer($player) {
+        $this->player = $player;
+    }
+
+}
