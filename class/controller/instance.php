@@ -69,6 +69,33 @@ class Instance {
         return $player;
     }
 
+    public function state($player) {
+        $state = $player->getState();
+        if ($this->player->getId() == $player->getId()) {
+            switch ($state) {
+                case 0:
+                    $state = 1;
+                    break;
+                case 1:
+                    $state = 2;
+                    break;
+                case 2:
+                    $state = 3;
+                    break;
+                case 3:
+                    $state = 4;
+                    break;
+                case 4:
+                    $state = 5;
+                    $this->nextPlayer();
+                    break;
+            }
+        }
+        $result = $state != $player->getState();
+        $player->setState($state);
+        return $result;
+    }
+
     public function login($user, $id) {
         foreach ($this->players as $player) {
             if ($player->checkId($id)) {
@@ -103,11 +130,11 @@ class Instance {
         }
         return NULL;
     }
-    
-    public function getPlayers(){
+
+    public function getPlayers() {
         $array = [];
         foreach ($this->players as $player) {
-            array_push($array, array($player->getId(), $player->getPseudo()));
+            array_push($array, array($player->getColor(), $player->getPseudo()));
         }
         return $array;
     }

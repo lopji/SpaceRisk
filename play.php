@@ -27,11 +27,12 @@
             <div class="row">
                 <div id="joueurs" class="col-md-4">
                 </div>
-                <div id="phase" class="col-md-4">
-                    <h2>Déployement</h2>
+                <div 
+                    class="col-md-4">
+                    <h2 id="phase"></h2>
                 </div>
                 <div class="col-md-4"><div id="troupes">
-                        <img src="./views/ressources/rocketship.svg" alt="rocket" width="40px" height="40px"></span> 2/9
+                        <img src="./views/ressources/rocketship.svg" alt="rocket" width="40px" height="40px"></span> <span id="troop">0</span>
                     </div>
                 </div>
             </div>
@@ -70,7 +71,7 @@
                     <div class="sidebar-module">
                         <div class="text-center">
                             <h4 id="instructions">Cliquez sur les planètes pour y déployer vos flottes</h4>
-                            <p><input id="nextPhase" class="btn btn-success" type="button" value="Prochaine phase"></p>
+                            <p><input id="nextPhase" class="btn btn-success" type="button" onclick="send(format(1, ''));"value="Prochaine phase"></p>
                             <p><input id="adandon" class="btn btn-danger" type="button" value="Abandonner"></div></p>
                     </div>
                 </div><!-- /.blog-sidebar -->

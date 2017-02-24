@@ -19,25 +19,27 @@ function init() {
             switch (parseInt(data[0])) {
                 //Login
                 case 0:
-                    console.log("login: " + data[1]);
                     break;
-                //Logout
+                    //Logout
                 case 1:
-                    console.log("logout: " + data[1]);
                     break;
-                //Kick
+                    //Kick
                 case 2:
                     kick();
                     break;
-                //List player
+                    //List player
                 case 3:
-                    data[1].forEach(function(ps) {
-                        $('#joueurs').append('<p>' + ps +'</p>');
-                    })
+                    data[1].forEach(function (ps) {
+                        $('#joueurs').append('<p style="color:' + ps[0] + ';">' + ps[1] + '</p>');
+                    });
                     break;
-                //State
+                    //State
                 case 4:
-                    console.log("State");
+                    state(data[1]);
+                    break;
+                    //Troop
+                case 5:
+                    $('#troop').html(data[1]);
                     break;
             }
         };
@@ -46,6 +48,33 @@ function init() {
         };
     } catch (ex) {
         console.log(ex);
+    }
+}
+
+function state(id) {
+    phase(id);
+}
+
+function phase(id) {
+    switch (id) {
+        case 0:
+            $('#phase').html("Deployment");
+            break;
+        case 1:
+            $('#phase').html("Move");
+            break;
+        case 2:
+            $('#phase').html("Attack");
+            break;
+        case 3:
+            $('#phase').html("Game");
+            break;
+        case 4:
+            $('#phase').html("Score");
+            break;
+        case 5:
+            $('#phase').html("Wait");
+            break;
     }
 }
 

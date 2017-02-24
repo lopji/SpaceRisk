@@ -8,6 +8,7 @@ class Player {
     private $state;
     private $troop;
     private $pseudo;
+    private $color;
 
     public function __construct($pseudo) {
         $this->id = -1;
@@ -16,6 +17,7 @@ class Player {
         $this->state = 5;
         $this->troop = 20;
         $this->pseudo = $pseudo;
+        $this->color = '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT);
     }
 
     public function login($id, $user) {
@@ -75,6 +77,10 @@ class Player {
     
     public function getColor() {
         return $this->color;
+    }
+    
+    public function getTroop(){
+        return $this->troop;
     }
 
     public function __toString() {
