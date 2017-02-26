@@ -22,12 +22,26 @@ class Instance {
         $this->player->setState(0);
     }
 
+    public function deployment($player, $idTerritory, $troop) {
+        if ($this->player->getId() == $player->getId()) {
+            if ($this->territorys[$idTerritory]->checkPlayer($player)) {
+                if ($player->deployment($troop)) {
+                    $this->territorys[$idTerritory]->addTroop($troop);
+                    return TRUE;
+                }
+            }
+        }
+        return FALSE;
+    }
+
     public function state($player) {
         $state = $player->getState();
         if ($this->player->getId() == $player->getId()) {
             switch ($state) {
                 case 0:
-                    $state = 1;
+                    if ($player->getTroop() == 0) {
+                        $state = 1;
+                    }
                     break;
                 case 1:
                     $state = 2;
@@ -92,12 +106,10 @@ class Instance {
         return NULL;
     }
 
-    public function getTerritorysByPlayer($player) {
+    public function getViewTerritorysByPlayer($player) {
         $array = [];
         foreach ($this->territorys as $territory) {
-            if($player->checkId($territory->getPlayer()->getId())){
-                 array_push($array, $territory->getId());
-            }
+            array_push($array, array($territory->getId(), $territory->checkPlayer($player), $territory->getTroop()));
         }
         return $array;
     }

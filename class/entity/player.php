@@ -31,6 +31,19 @@ class Player {
         $this->connected = FALSE;
     }
 
+    public function deployment($troop) {
+        if ($this->state == 2) {
+            if ($troop == $this->troop) {
+                $this->troop = 0;
+                return TRUE;
+            } else if ($troop < $this->troop) {
+                $this->troop -= $troop;
+                return TRUE;
+            }
+        }
+        return FALSE;
+    }
+
     public function checkUser($user) {
         return $this->user->id == $user->id;
     }
@@ -54,20 +67,20 @@ class Player {
     public function getId() {
         return $this->id;
     }
-    
-    public function getUser(){
+
+    public function getUser() {
         return $this->user;
     }
-    
-    public function getPseudo(){
+
+    public function getPseudo() {
         return $this->pseudo;
     }
-    
+
     public function getColor() {
         return $this->color;
     }
-    
-    public function getTroop(){
+
+    public function getTroop() {
         return $this->troop;
     }
 

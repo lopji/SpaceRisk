@@ -22,7 +22,7 @@ class Server extends WebSocketServer {
                     $this->send($user, json_encode(array(3, $this->instance->getPlayers())));
                     $this->send($user, json_encode(array(4, $player->getState())));
                     $this->send($user, json_encode(array(5, $player->getTroop())));
-                    $this->send($user, json_encode(array(6, $this->instance->getTerritorysByPlayer($player))));
+                    $this->send($user, json_encode(array(6, $this->instance->getViewTerritorysByPlayer($player))));
                 } else {
                     $this->send($user, json_encode(array(2)));
                 }
@@ -34,6 +34,17 @@ class Server extends WebSocketServer {
                     $this->send($user, json_encode(array(4, $player->getState())));
                     if ($player->getState() == 5) {
                         $this->send($this->instance->getPlayer()->getUser(), json_encode(array(4, $this->instance->getPlayer()->getState())));
+                    }
+                }
+                break;
+            //Deployment
+            case 2:
+                $player = $this->instance->getPlayerByUser($user);
+                if ($this->instance->deployment($player, $data[1][0], $data[1][1])) {
+                    $this->send($user, json_encode(array(5, $player->getTroop())));
+                    foreach ($this->users  as $u) {
+                        $p = $this->instance->getPlayerByUser($u);
+                        $this->send($u, json_encode(array(6, $this->instance->getViewTerritorysByPlayer($p))));
                     }
                 }
                 break;
