@@ -62,10 +62,10 @@ function phase(id) {
     console.log("TESTTTT");
     switch (id) {
         case 0:
-            $('#phase').html("Deployment");
+            $('#phase').html("Deployment1");
             break;
         case 1:
-            $('#phase').html("Move");
+            $('#phase').html("Move1");
             break;
         case 2:
             $('#phase').html("Attack");
