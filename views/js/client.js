@@ -39,7 +39,7 @@ function init() {
                     break;
                     //Troop
                 case 5:
-                    $('#troop').html(data[1]);
+                    $('#troupes').html(data[1]);
                     break;
                 case 6:
                     
