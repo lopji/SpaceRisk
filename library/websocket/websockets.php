@@ -36,12 +36,6 @@ abstract class WebSocketServer {
         // the handshake has completed.
     }
 
-    protected function sendAll($message) {
-        foreach ($this->users as $user) {
-            $this->send($user, $message);
-        }
-    }
-
     protected function send($user, $message) {
         if ($user->handshake) {
             $message = $this->frame($message, $user);

@@ -17,6 +17,18 @@ class Territory {
         return $this->id;
     }
     
+    public function addTroop($troop){
+        $this->troop += $troop;
+    }
+    
+    public function checkPlayer($player){
+        return $this->player == $player;
+    }
+    
+    public function getTroop(){
+        return $this->troop;
+    }
+    
     public function getPlayer() {
         return $this->player;
     }
