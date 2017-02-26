@@ -97,6 +97,6 @@ function send(message) {
 }
 
 function grayFilterPhase(idPhase){
-  $("#phX").children().css("filter" , "grayscale(0%)");
-  $("#ph"+idPhase).css("filter" , "grayscale(100%)");
+  $("#phX").children().css("filter" , "grayscale(100%)");
+  $("#ph"+idPhase).css("filter" , "grayscale(0%)");
 }
