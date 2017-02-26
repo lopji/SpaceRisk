@@ -1,19 +1,5 @@
 <?php
-$phase = 1;
 
-function filterPicture($phase) {
-    $grey = array();
-    for ($i = 0; $i < 4; $i++) {
-        if ($i != $phase) {
-            $grey[$i] = 'greyPicture';
-        } else {
-            $grey[$i] = '';
-        }
-    }
-    return $grey;
-}
-
-$grey = filterPicture($phase);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,7 +29,7 @@ $grey = filterPicture($phase);
             <div class="row">
                 <div id="joueurs" class="col-md-4">
                 </div>
-                <div 
+                <div
                     class="col-md-4">
                     <h2 id="phase"></h2>
                 </div>
@@ -95,25 +81,25 @@ $grey = filterPicture($phase);
             <div class="row">
                 <div class="text-center">
                     <div class="col-md-1 col-md-offset-1">
-                        <img src="./views/ressources/ss4.jpg" alt="rocket" width="40px" height="40px" id="<?php echo($grey[0]); ?>">
+                        <img src="./views/ressources/ss4.jpg" alt="rocket" width="40px" height="40px" id="ph1">
                     </div>
                     <div class="col-md-1">
                         <img src="./views/ressources/arrow.png" alt="arrow" width="40px" height="40px">
                     </div>
                     <div class="col-md-1">
-                        <img src="./views/ressources/ss1.jpg" alt="rocket" width="40px" height="40px" id="<?php echo($grey[1]); ?>">
+                        <img src="./views/ressources/ss1.jpg" alt="rocket" width="40px" height="40px" id="ph2">
                     </div>
                     <div class="col-md-1">
                         <img src="./views/ressources/arrow.png" alt="arrow" width="40px" height="40px">
                     </div>
                     <div class="col-md-1">
-                        <img src="./views/ressources/ss2.jpg" alt="rocket" width="40px" height="40px" id="<?php echo($grey[2]); ?>">
+                        <img src="./views/ressources/ss2.jpg" alt="rocket" width="40px" height="40px" id="ph3">
                     </div>
                     <div class="col-md-1">
                         <img src="./views/ressources/arrow.png" alt="arrow" width="40px" height="40px">
                     </div>
                     <div class="col-md-1">
-                        <img src="./views/ressources/ss3.jpg" alt="rocket" width="40px" height="40px" id="<?php echo($grey[3]); ?>">
+                        <img src="./views/ressources/ss3.jpg" alt="rocket" width="40px" height="40px" id="ph4">
                     </div>
                 </div>
             </div>

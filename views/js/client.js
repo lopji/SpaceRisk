@@ -42,7 +42,7 @@ function init() {
                     $('#troupes').html(data[1]);
                     break;
                 case 6:
-                    
+
                     break;
             }
         };
@@ -59,6 +59,7 @@ function state(id) {
 }
 
 function phase(id) {
+    console.log("TESTTTT");
     switch (id) {
         case 0:
             $('#phase').html("Deployment");
@@ -90,4 +91,11 @@ function kick() {
 function send(message) {
     socket.send(JSON.stringify(message));
     console.log("Send: " + message);
+}
+
+function grayFilterPhase(idPhase){
+  idPhase+=1;
+  var elmt = document.getElementById("ph1");
+  elmt.style.backgroundColor = "#ff0";
+  elmt.style.filter = "grayscale(100%)";
 }
