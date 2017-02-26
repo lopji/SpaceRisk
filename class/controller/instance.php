@@ -24,7 +24,9 @@ class Instance {
 
     public function deployment($player, $idTerritory, $troop) {
         if ($this->player->getId() == $player->getId()) {
+            echo "1";
             if ($this->territorys[$idTerritory]->checkPlayer($player)) {
+                   echo "2";
                 if ($player->deployment($troop)) {
                     $this->territorys[$idTerritory]->addTroop($troop);
                     return TRUE;

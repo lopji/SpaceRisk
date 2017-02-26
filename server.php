@@ -14,6 +14,7 @@ class Server extends WebSocketServer {
 
     protected function process($user, $message) {
         $data = json_decode($message);
+        $this->stdout($message);
         switch ($data[0]) {
             //Client login
             case 0:
@@ -89,7 +90,7 @@ class Server extends WebSocketServer {
     }
 
     protected function connected($user) {
-        $this->stdout($user->id);
+        
     }
 
     protected function closed($user) {

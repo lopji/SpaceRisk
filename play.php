@@ -1,6 +1,4 @@
-<?php
-
-?>
+<?php ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -20,7 +18,6 @@
         <!-- Custom styles for this template -->
         <link href="./views/css/style.css" rel="stylesheet">
 
-        <script src="./views/js/client.js"></script>
 
     </head>
 
@@ -41,9 +38,9 @@
             <div class="row">
                 <div class="col-md-8">
                     <div id="plateau">
-                        <svg xmlns="http://www.w3.org/2000/svg">
-                        <circle id="greencircle" cx="30" cy="30" r="30" fill="green" />
-                        </svg>
+                        <?php
+                        require_once './views/ressources/map/svg.php';
+                        ?>
                     </div>
                 </div>
 
@@ -109,10 +106,9 @@
                 <div class="container">
                 </div>
             </footer>
-
-            <!-- Bootstrap core JavaScript
-            ================================================== -->
-            <!-- Placed at the end of the document so the pages load faster -->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+            
     </body>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="./views/js/client.js"></script>
 </html>

@@ -32,7 +32,7 @@ class Player {
     }
 
     public function deployment($troop) {
-        if ($this->state == 2) {
+        if ($this->state == 0) {
             if ($troop == $this->troop) {
                 $this->troop = 0;
                 return TRUE;
