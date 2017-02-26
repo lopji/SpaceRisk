@@ -59,16 +59,18 @@ function state(id) {
 }
 
 function phase(id) {
-    console.log("TESTTTT");
     switch (id) {
         case 0:
             $('#phase').html("Deployment");
+            grayFilterPhase(id);
             break;
         case 1:
             $('#phase').html("Move");
+            grayFilterPhase(id);
             break;
         case 2:
             $('#phase').html("Attack");
+            grayFilterPhase(id);
             break;
         case 3:
             $('#phase').html("Game");
@@ -78,6 +80,7 @@ function phase(id) {
             break;
         case 5:
             $('#phase').html("Wait");
+            grayFilterPhase(id);
             break;
     }
 }
@@ -94,8 +97,6 @@ function send(message) {
 }
 
 function grayFilterPhase(idPhase){
-  idPhase+=1;
-  var elmt = document.getElementById("ph1");
-  elmt.style.backgroundColor = "#ff0";
-  elmt.style.filter = "grayscale(100%)";
+  $("#phX").children().css("filter" , "grayscale(0%)");
+  $("#ph"+idPhase).css("filter" , "grayscale(100%)");
 }

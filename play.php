@@ -79,27 +79,27 @@
                 </div><!-- /.blog-sidebar -->
             </div><!-- /.row -->
             <div class="row">
-                <div class="text-center">
-                    <div class="col-md-1 col-md-offset-1">
-                        <img src="./views/ressources/ss4.jpg" alt="rocket" width="40px" height="40px" id="ph1">
+                <div class="text-center" id="phX">
+                    <div class="col-md-1 col-md-offset-1" id="ph0">
+                        <img src="./views/ressources/ss4.jpg" alt="rocket" width="40px" height="40px" >
                     </div>
                     <div class="col-md-1">
                         <img src="./views/ressources/arrow.png" alt="arrow" width="40px" height="40px">
                     </div>
-                    <div class="col-md-1">
-                        <img src="./views/ressources/ss1.jpg" alt="rocket" width="40px" height="40px" id="ph2">
+                    <div class="col-md-1" id="ph1">
+                        <img src="./views/ressources/ss1.jpg" alt="rocket" width="40px" height="40px" >
+                    </div>
+                    <div class="col-md-1" >
+                        <img src="./views/ressources/arrow.png" alt="arrow" width="40px" height="40px">
+                    </div>
+                    <div class="col-md-1" id="ph2">
+                        <img src="./views/ressources/ss2.jpg" alt="rocket" width="40px" height="40px" >
                     </div>
                     <div class="col-md-1">
                         <img src="./views/ressources/arrow.png" alt="arrow" width="40px" height="40px">
                     </div>
-                    <div class="col-md-1">
-                        <img src="./views/ressources/ss2.jpg" alt="rocket" width="40px" height="40px" id="ph3">
-                    </div>
-                    <div class="col-md-1">
-                        <img src="./views/ressources/arrow.png" alt="arrow" width="40px" height="40px">
-                    </div>
-                    <div class="col-md-1">
-                        <img src="./views/ressources/ss3.jpg" alt="rocket" width="40px" height="40px" id="ph4">
+                    <div class="col-md-1" id="ph5">
+                        <img src="./views/ressources/ss3.jpg" alt="rocket" width="40px" height="40px" >
                     </div>
                 </div>
             </div>
