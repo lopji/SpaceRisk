@@ -8,8 +8,6 @@
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
     xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-    width="297mm"
-    height="210mm"
     viewBox="0 0 1052.3623 744.09456"
     id="svg2"
     version="1.1"
