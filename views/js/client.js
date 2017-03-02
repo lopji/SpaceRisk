@@ -30,7 +30,7 @@ function init() {
                     //List player
                 case 3:
                     data[1].forEach(function (ps) {
-                        $('#joueurs').append('<p style="color:' + ps[0] + ';">' + ps[1] + '</p>');
+                        $('#joueurs').append('<span style="color:' + ps[0] + ';">' + ps[1] + ' </span>');
                     });
                     break;
                     //State
