@@ -56,15 +56,13 @@
                     <div class="sidebar-module">
                         <h4>Chat</h4>
                         <ol class="list-unstyled" id="chat">
-                            <li style="color:green;">Lama</li>
-                            <li style="color:red;">Dark Magenta</li>
-                            <li style="color:blue;">Yo</li>
-                            <li style="color:red;">Blou</li>
+
                         </ol>
-                        <form class="form-inline">
+                        <form class="form-inline" action="/" method="post" id="formulaire_chat">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Parlez ici..."/></div>
-                            <button type="button" class="btn btn-primary btn-sm">Envoyer</button>
+                                <input type="text" class="form-control" id="message" placeholder="Parlez ici..."/>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm" >Envoyer</button>
                         </form>
                     </div>
                     <div class="sidebar-module">
@@ -106,9 +104,9 @@
                 <div class="container">
                 </div>
             </footer>
-            
+
     </body>
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="./views/js/client.js"></script>
 </html>
