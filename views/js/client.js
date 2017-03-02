@@ -47,8 +47,8 @@ function init() {
                     break;
                 case 6:
                     data[1].forEach(function(planet){
-                      console.log(planet);
-                      $('#'+planet[0]).html('<h4>Example <span class="label label-default">'+planet[2]+'</span></h4>');
+                      console.log('test: #'+planet[0]);
+                      $('svg').append('<text x="'+$('#'+planet[0]).attr('cx')+'" y="'+$('#'+planet[0]).attr('cy')+'" fill="white" anchor="middle">'+planet[2]+'</text>');
                     });
             }
         };
@@ -115,7 +115,7 @@ $('#layer3 ellipse').on({
       for (var i = 1; i <= troops; i++) {
           content += '<option value="'+i+'">'+i+'</option>';
         }
-      content += '</select><button type="button" id="btnSend" class="btn btn-primary" onClick="send(format(2, [self.attr("id"),'+ '$("#sel-deploy").val()]));">Déployer</button></div>';
+      content += "</select><button type='button' id='btnSend' class='btn btn-primary' onClick='send(format(2, [self.attr(\"id\"),"+ "$(\"#sel-deploy\").val()]));'>Déployer</button></div>";
 
       $(this).css('filter', 'url(#dropshadow)').css('stroke', '#ffffff');
       $(this).popover({container:'body', html:true, content:content, title:'Deploy',
