@@ -33,17 +33,24 @@ class Instance {
         }
         return FALSE;
     }
-    
-    public function movement($player, $id1, $id2, $troop){
+
+    public function movement($player, $id1, $id2, $troop) {
         if ($this->player->getId() == $player->getId()) {
             if ($this->territorys[$id1]->checkPlayer($player)) {
                 if ($this->territorys[$id2]->checkPlayer($player)) {
-                    if ($this->territorys[$id1]->removeTroop($troop)){
+                    if ($this->territorys[$id1]->removeTroop($troop)) {
                         $this->territorys[$id2]->addTroop($troop);
                         return TRUE;
                     }
                 }
             }
+        }
+        return FALSE;
+    }
+
+    public function attack($player, $id1, $id2, $troop) {
+        if ($this->player->getId() == $player->getId()) {
+            
         }
         return FALSE;
     }
@@ -76,17 +83,17 @@ class Instance {
         $player->setState($state);
         return $result;
     }
-    
+
     //New Round
     public function round() {
         $this->nextPlayer();
-        if ($this->checkRound()) {        
-            foreach($this->players as $p){
+        if ($this->checkRound()) {
+            foreach ($this->players as $p) {
                 $nbTerritory = 0;
                 $nbSysSolaire = 0;
-            
-                foreach ($this->territorys as $ter){
-                    if($ter->getPlayer() == $p){
+
+                foreach ($this->territorys as $ter) {
+                    if ($ter->getPlayer() == $p) {
                         $nbTerritory++;
                     }
                 }
@@ -123,8 +130,8 @@ class Instance {
             $player->logout();
         }
     }
-    
-    public function checkRound(){
+
+    public function checkRound() {
         return $this->step % $this->config->server_info["nbPlayer"] == 0;
     }
 
