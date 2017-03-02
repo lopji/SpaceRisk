@@ -13,14 +13,23 @@ class Territory {
         $this->troop = 1;
     }
 
+    public function checkAdjacency($id){
+      foreach ( $this->neighbours as $value){
+        if($value == $id){
+          return TRUE;
+        }
+      }
+      return FALSE;
+    }
+
     public function getId(){
         return $this->id;
     }
-    
+
     public function addTroop($troop){
         $this->troop += $troop;
     }
-  
+
     public function removeTroop($troop){
         if($this->troop - $troop > 1){
             $this->troop -= $troop;
@@ -28,15 +37,15 @@ class Territory {
         }
         return FALSE;
     }
-    
+
     public function checkPlayer($player){
         return $this->player == $player;
     }
-    
+
     public function getTroop(){
         return $this->troop;
     }
-    
+
     public function getPlayer() {
         return $this->player;
     }
