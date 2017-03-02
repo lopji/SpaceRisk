@@ -1,5 +1,8 @@
 var socket;
 
+var troops;
+var seltroops;
+
 function format(type, data) {
     return [type, data];
 }
@@ -40,6 +43,7 @@ function init() {
                     //Troop
                 case 5:
                     $('#troupes').html(data[1]);
+                    troops = data[1];
                     break;
                 case 6:
 
@@ -101,16 +105,27 @@ function grayFilterPhase(idPhase) {
     $("#ph" + idPhase).css("filter", "grayscale(0%)");
 }
 
+$('#btnSend').on({
+   click: function() {
+   } 
+});
 
 $('#layer3 ellipse').on({
     mouseenter: function () {
+        var content = '<div class="select"><select class="form-control">';
+        for (var i = 1; i <= troops; i++)
+            content += '<option value="'+i+'">'+i+'</option>';
+        content += '</select><button type="button" id="btnSend" class="btn btn-primary">Déployer</button></div>';
+
         $(this).css('filter', 'url(#dropshadow)').css('stroke', '#ffffff');
+        $(this).popover({container:'body', html:true, content:content, title:'Deploy',
+            template: '<div class="popover" role="tooltip"><div class="arrow"></div>\n\
+                <h3 class="popover-title"></h3><div class="popover-content"></div></div>' });
     },
     mouseleave: function () {
         $(this).css('filter', '').css('stroke', '#000000');
     },
     click: function () {
-      $(this).popover({container:'body', html:true, content: 'plop', template: '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title">Bitch</h3><div class="popover-content">botch</div></div>' });
       send(format(2, [$(this).attr('id'), 10]));
 
     }
