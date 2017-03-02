@@ -44,6 +44,12 @@ function init() {
                 case 6:
 
                     break;
+                case 7:
+                    if ($("#chat > div").length === 5) {
+                        $('#chat').find('div').first().remove();
+                    }
+                    $('#chat').append('<li style="color:' + data[1][0] + ';">' + data[1][1] + '</li>');
+                    break;
             }
         };
         socket.onclose = function (msg) {
@@ -84,6 +90,12 @@ function phase(id) {
             break;
     }
 }
+$('#formulaire_chat').submit(function () {
+    message = $('#message').val();
+    send(format(3, message));
+    $('#message').val('').focus();
+    return false;
+});
 
 function kick() {
     console.log("You have been kicked !");
