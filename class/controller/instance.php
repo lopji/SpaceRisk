@@ -5,10 +5,11 @@ require_once('./class/entity/player.php');
 class Instance {
 
     private $config;
-    private $players = array();
     private $player;
     private $step;
+    private $players = array();
     private $territorys = array();
+    private $attacks = array();
 
     public function __construct() {
         $this->step = 0;
@@ -33,12 +34,12 @@ class Instance {
         }
         return FALSE;
     }
-    
-    public function movement($player, $id1, $id2, $troop){
+
+    public function movement($player, $id1, $id2, $troop) {
         if ($this->player->getId() == $player->getId()) {
             if ($this->territorys[$id1]->checkPlayer($player)) {
                 if ($this->territorys[$id2]->checkPlayer($player)) {
-                    if ($this->territorys[$id1]->removeTroop($troop)){
+                    if ($this->territorys[$id1]->removeTroop($troop)) {
                         $this->territorys[$id2]->addTroop($troop);
                         return TRUE;
                     }
@@ -46,6 +47,44 @@ class Instance {
             }
         }
         return FALSE;
+    }
+
+    public function attack($player, $id1, $id2, $troop) {
+        if ($this->player->getId() == $player->getId()) {
+            if ($this->territorys[$id1]->checkPlayer($player)) {
+                if ($this->territorys[$id1]->removeTroop($troop)) {
+                    $this->addAttack($id1, $id2, $troop);
+                }
+                return TRUE;
+            }
+        }
+        return FALSE;
+    }
+
+    public function resolution() {
+        foreach ($this->attacks as $attack) {
+            $id1 = $attack[0];
+            $id2 = $attack[1];
+            $troop1 = $attack[2];
+            $player = $this->territorys[$id1]->getPlayer();
+
+            if (!$this->territorys[$id2]->checkPlayer($player)) {
+                $troop2 = $this->territorys[$id2]->getTroop();
+                $this->territorys[$id1]->removeTroop($troop1);
+
+                if ($troop1 == $troop2) {
+                    $this->territorys[$id2]->setTroop(1);
+                } else if ($troop1 > $troop2) {
+                    $this->territorys[$id2]->setTroop($troop1 - $troop2);
+                    $this->territorys[$id2]->setPlayer($player);
+                } else if ($troop1 < $troop2) {
+                    $this->territorys[$id2]->setTroop($troop2 - $troop1);
+                }
+            } else {
+                $this->movement($player, $id1, $id2, $troop1);
+            }
+        }
+        $this->attacks = [];
     }
 
     public function state($player) {
@@ -61,7 +100,12 @@ class Instance {
                     $state = 2;
                     break;
                 case 2:
-                    $state = 3;
+                    if (count($this->attacks) == 0) {
+                        $state = 5;
+                        $this->round();
+                    } else {
+                        $state = 3;
+                    }
                     break;
                 case 3:
                     $state = 4;
@@ -76,17 +120,17 @@ class Instance {
         $player->setState($state);
         return $result;
     }
-    
+
     //New Round
     public function round() {
         $this->nextPlayer();
-        if ($this->checkRound()) {        
-            foreach($this->players as $p){
+        if ($this->checkRound()) {
+            foreach ($this->players as $p) {
                 $nbTerritory = 0;
                 $nbSysSolaire = 0;
-            
-                foreach ($this->territorys as $ter){
-                    if($ter->getPlayer() == $p){
+
+                foreach ($this->territorys as $ter) {
+                    if ($ter->getPlayer() == $p) {
                         $nbTerritory++;
                     }
                 }
@@ -123,9 +167,13 @@ class Instance {
             $player->logout();
         }
     }
-    
-    public function checkRound(){
+
+    public function checkRound() {
         return $this->step % $this->config->server_info["nbPlayer"] == 0;
+    }
+
+    public function addAttack($id1, $id2, $troop) {
+        array_push($this->attacks, array($id1, $id2, $troop));
     }
 
     public function getPlayerByUser($user) {

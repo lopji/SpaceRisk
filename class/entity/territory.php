@@ -22,7 +22,7 @@ class Territory {
     }
   
     public function removeTroop($troop){
-        if($this->troop - $troop > 0){
+        if($this->troop - $troop > 1){
             $this->troop -= $troop;
             return TRUE;
         }
