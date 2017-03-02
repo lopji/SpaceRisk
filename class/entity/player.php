@@ -43,7 +43,7 @@ class Player {
         }
         return FALSE;
     }
-
+    
     public function checkUser($user) {
         return $this->user->id == $user->id;
     }
