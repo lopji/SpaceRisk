@@ -43,11 +43,14 @@ class Server extends WebSocketServer {
                 $player = $this->instance->getPlayerByUser($user);
                 if ($this->instance->deployment($player, $data[1][0], $data[1][1])) {
                     $this->send($user, json_encode(array(5, $player->getTroop())));
-                    foreach ($this->users  as $u) {
+                    foreach ($this->users as $u) {
                         $p = $this->instance->getPlayerByUser($u);
                         $this->send($u, json_encode(array(6, $this->instance->getViewTerritorysByPlayer($p))));
                     }
                 }
+                break;
+            //Message
+            case 3:
                 break;
             /*
               //Deployment
