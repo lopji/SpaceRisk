@@ -4,6 +4,10 @@ function format(type, data) {
     return [type, data];
 }
 
+function checkTitle() {
+    return document.title === "RISK";
+}
+
 function init() {
     var host = "ws://127.0.0.1:666"; // SET THIS TO YOUR SERVER
     try {
@@ -42,7 +46,13 @@ function init() {
                     $('#troupes').html(data[1]);
                     break;
                 case 6:
-
+                    if (checkTitle()) {
+                        data[1].forEach(function (ps) {
+                            if (ps[1] == true) {
+                                document.title = "Player " + ps[0] + " - " + document.title;
+                            }
+                        });
+                    }
                     break;
                 case 7:
                     if ($("#chat > div").length === 5) {
