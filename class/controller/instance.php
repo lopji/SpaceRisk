@@ -76,12 +76,25 @@ class Instance {
         $player->setState($state);
         return $result;
     }
-
+    
+    //New Round
     public function round() {
-        if ($this->step % $this->config->server_info["nbPlayer"] == 0) {
-            //New Round
-        }
         $this->nextPlayer();
+        if ($this->checkRound()) {        
+            foreach($this->players as $p){
+                $nbTerritory = 0;
+                $nbSysSolaire = 0;
+            
+                foreach ($this->territorys as $ter){
+                    if($ter->getPlayer() == $p){
+                        $nbTerritory++;
+                    }
+                }
+                // TODO: Calculer le nombre de système solaire
+
+                $p->setTroop($nbTerritory, $nbSysSolaire);
+            }
+        }
     }
 
     public function nextPlayer() {
@@ -109,6 +122,10 @@ class Instance {
         if ($player != NULL) {
             $player->logout();
         }
+    }
+    
+    public function checkRound(){
+        return $this->step % $this->config->server_info["nbPlayer"] == 0;
     }
 
     public function getPlayerByUser($user) {
