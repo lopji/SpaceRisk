@@ -55,9 +55,14 @@ class Server extends WebSocketServer {
             case 3:
                 $this->stdout("Client message");
                 $player = $this->instance->getPlayerByUser($user);
-                foreach($this->users as $u){
+                foreach ($this->users as $u) {
                     $this->send($u, json_encode(array(7, array($player->getColor(), $data[1]))));
                 }
+                break;
+
+            //Movement troop
+            case 4:
+                $this->stdout("Movement");
                 break;
             /*
               //Deployment
