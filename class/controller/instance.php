@@ -33,6 +33,20 @@ class Instance {
         }
         return FALSE;
     }
+    
+    public function movement($player, $id1, $id2, $troop){
+        if ($this->player->getId() == $player->getId()) {
+            if ($this->territorys[$id1]->checkPlayer($player)) {
+                if ($this->territorys[$id2]->checkPlayer($player)) {
+                    if ($this->territorys[$id1]->removeTroop($troop)){
+                        $this->territorys[$id2]->addTroop($troop);
+                        return TRUE;
+                    }
+                }
+            }
+        }
+        return FALSE;
+    }
 
     public function state($player) {
         $state = $player->getState();

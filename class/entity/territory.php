@@ -20,6 +20,14 @@ class Territory {
     public function addTroop($troop){
         $this->troop += $troop;
     }
+  
+    public function removeTroop($troop){
+        if($this->troop - $troop > 0){
+            $this->troop -= $troop;
+            return TRUE;
+        }
+        return FALSE;
+    }
     
     public function checkPlayer($player){
         return $this->player == $player;
