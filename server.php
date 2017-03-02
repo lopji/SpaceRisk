@@ -36,6 +36,12 @@ class Server extends WebSocketServer {
                     $this->send($user, json_encode(array(4, $player->getState())));
                     if ($player->getState() == 5) {
                         $this->send($this->instance->getPlayer()->getUser(), json_encode(array(4, $this->instance->getPlayer()->getState())));
+                        if ($this->instance->checkRound()) {
+                            foreach ($this->users as $u) {
+                                $p = $this->instance->getPlayerByUser($u);
+                                $this->send($u, json_encode(array(5, $p->getTroop())));
+                            }
+                        }
                     }
                 }
                 break;
