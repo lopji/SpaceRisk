@@ -24,7 +24,7 @@
     <body onload="init()">
         <div class="container">
             <div class="row">
-                <div id="joueurs" class="col-md-4">
+                <div  id="joueurs" class="col-md-4">
                 </div>
                 <div
                     class="col-md-4">
@@ -106,9 +106,10 @@
                 <div class="container">
                 </div>
             </footer>
-            
+
     </body>
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="./views/js/bootstrap.min.js"></script>
     <script src="./views/js/client.js"></script>
 </html>

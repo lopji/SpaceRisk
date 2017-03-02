@@ -110,6 +110,8 @@ $('#layer3 ellipse').on({
         $(this).css('filter', '').css('stroke', '#000000');
     },
     click: function () {
-        send(format(2, [$(this).attr('id'), 10]));
+      $(this).popover({container:'body', html:true, content: 'plop', template: '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title">Bitch</h3><div class="popover-content">botch</div></div>' });
+      send(format(2, [$(this).attr('id'), 10]));
+
     }
 });
