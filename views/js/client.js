@@ -166,7 +166,7 @@ $('#layer3 ellipse').on({
                     content += '<option value="'+i+'">'+i+'</option>';
                   }
                 content += "</select><button type='button' id='btnSendMoveFrom' class='btn btn-primary' \n\
-                                onClick='seltroops = $(\"#sel-move_from\").val();\n\
+                                onClick='troops = $(\"#sel-move_from\").val();\n\
                                 move_from = "+self.attr('id')+"; actualState++;'>Sélectionner troupes</button></div>";
                 $(this).popover({container:'body', html:true, content:content, title:'Select',
                     template: '<div class="popover" role="tooltip"><div class="arrow"></div>'+
@@ -177,9 +177,10 @@ $('#layer3 ellipse').on({
               $(this).popover('destroy');
               if (parseInt(self.attr('id')) !== move_from) {
                   var content = "<button type='button' id='btnSendMoveTo' class='btn btn-primary' \n\
-                                onClick='move_to = "+self.attr('id')+";'>\n\
+                                data-toggle='modal' data-target='#combatModal'\n\
+                                move_to = "+self.attr('id')+";'>\n\
                                 Déplacer/Attaquer</button></div>";
-                $(this).popover({container:'body', html:true, content:content, title:'Move/Attack',
+                $(this).popover({container:'body', html:true, content:content, title:troops + ' troupes',
                     template: '<div class="popover" role="tooltip"><div class="arrow"></div>'+
                         '<h3 class="popover-title"></h3><div class="popover-content"></div></div>'});
               }
