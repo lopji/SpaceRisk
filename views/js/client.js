@@ -48,7 +48,11 @@ function init() {
                 case 6:
                     data[1].forEach(function(planet){
                       console.log('test: #'+planet[0]);
-                      $('svg').append('<text x="'+$('#'+planet[0]).attr('cx')+'" y="'+$('#'+planet[0]).attr('cy')+'" fill="white" anchor="middle">'+planet[2]+'</text>');
+                      var txt = makeSVG('text', {x: $('#'+planet[0]).attr('cx'), id:'lblTrpPlnt'+planet[0],
+                          y: $('#'+planet[0]).attr('cy'), fill: 'white', 'text-anchor':'middle',
+                            'font-family':'sans-serif', 'font-size':'20px'});
+                      txt.innerHTML = planet[2];
+                      document.getElementById('layer5').appendChild(txt);
                     });
             }
         };
@@ -59,6 +63,13 @@ function init() {
         console.log(ex);
     }
 }
+
+function makeSVG(tag, attrs) {
+            var el= document.createElementNS('http://www.w3.org/2000/svg', tag);
+            for (var k in attrs)
+                el.setAttribute(k, attrs[k]);
+            return el;
+        }
 
 function state(id) {
     phase(id);
@@ -90,6 +101,12 @@ function phase(id) {
             break;
     }
 }
+$('#formulaire_chat').submit(function () {
+    message = $('#message').val();
+    send(format(3, message));
+    $('#message').val('').focus();
+    return false;
+});
 
 function kick() {
     console.log("You have been kicked !");
