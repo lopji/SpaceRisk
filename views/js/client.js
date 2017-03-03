@@ -3,6 +3,7 @@ var socket;
 var troops;
 var seltroops;
 var actualState = 5;
+var firstInit = true;
 
 function format(type, data) {
     return [type, data];
@@ -48,6 +49,7 @@ function init() {
                     $('#troupes').html(data[1]);
                     break;
                 case 6:
+                    if (firstInit) {
                     data[1].forEach(function(planet){
                       console.log('test: #'+planet[0]);
                       var txt = makeSVG('text', {x: $('#'+planet[0]).attr('cx'), id:'lblTrpPlnt'+planet[0],
@@ -56,6 +58,13 @@ function init() {
                       txt.innerHTML = planet[2];
                       document.getElementById('layer5').appendChild(txt);
                     });
+                    firstInit = false;
+                }
+                else {
+                    data[1].forEach(function(planet){
+                        $('#lblTrpPlnt'+planet[0]).html(planet[2]);
+                    });
+                }
             }
         };
         socket.onclose = function (msg) {
