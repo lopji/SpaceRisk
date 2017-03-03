@@ -2,6 +2,7 @@ var socket;
 
 var troops;
 var seltroops;
+var actualState = 5;
 
 function format(type, data) {
     return [type, data];
@@ -39,6 +40,7 @@ function init() {
                     //State
                 case 4:
                     state(data[1]);
+                    actualState = data[1];
                     break;
                     //Troop
                 case 5:
@@ -128,17 +130,22 @@ var self;
 $('#layer3 ellipse').on({
     mouseenter: function () {
       self = $(this);
-      var content = '<div class="select"><select id="sel-deploy" class="form-control">';
-      for (var i = 1; i <= troops; i++) {
-          content += '<option value="'+i+'">'+i+'</option>';
-        }
-      content += "</select><button type='button' id='btnSend' class='btn btn-primary' onClick='send(format(2, [self.attr(\"id\"),"+ "$(\"#sel-deploy\").val()]));'>Déployer</button></div>";
-
+      switch (actualState) {
+          case 0:
+                var content = '<div class="select"><select id="sel-deploy" class="form-control">';
+                for (var i = 1; i <= troops; i++) {
+                    content += '<option value="'+i+'">'+i+'</option>';
+                  }
+                content += "</select><button type='button' id='btnSend' class='btn btn-primary' onClick='send(format(2, [self.attr(\"id\"),"+ "$(\"#sel-deploy\").val()]));'>Déployer</button></div>";
+                $(this).popover({container:'body', html:true, content:content, title:'Deploy',
+                    template: '<div class="popover" role="tooltip"><div class="arrow"></div>'+
+                        '<h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+                });
+          break;
+      }
+      
       $(this).css('filter', 'url(#dropshadow)').css('stroke', '#ffffff');
-      $(this).popover({container:'body', html:true, content:content, title:'Deploy',
-          template: '<div class="popover" role="tooltip"><div class="arrow"></div>'+
-              '<h3 class="popover-title"></h3><div class="popover-content"></div></div>'
-      });
+
     },
     mouseleave: function () {
         $(this).css('filter', '').css('stroke', '#000000');
