@@ -3,7 +3,7 @@
 class Player {
 
     const DEFAULT_TROOPS = 20;
-    
+
     private $id;
     private $user;
     private $connected;
@@ -81,11 +81,11 @@ class Player {
     public function getColor() {
         return $this->color;
     }
-    
-    public function setTroop($nbTerritory, $nbSysSolaire){
+
+    public function setTroop($nbTerritory, $nbSysSolaire) {
         //TODO: Prendre en compte le bonus du nombre de système solaire
         //      Prevoir de prendre en compte quel système solaire on aurait
-        $this->troop = intval(self::DEFAULT_TROOPS + (0.5 * $nbTerritory) + (0.25 * self::DEFAULT_TROOPS)*$nbSysSolaire);
+        $this->troop = intval(self::DEFAULT_TROOPS + (0.5 * $nbTerritory) + (0.25 * self::DEFAULT_TROOPS) * $nbSysSolaire);
     }
 
     public function getTroop() {
