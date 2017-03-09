@@ -128,12 +128,11 @@
                               <h4 class="modal-title" id="myModalLabel">Game</h4>
                       </div>
                         <div class="modal-body text-center">
-                              <button type="button" class="btn btn-primary" onclick="setup();"> Start</button>
+                              <button type="button" class="btn btn-primary" onclick="setup();" id="game_btn"> Start</button>
                               <div id='gameCanvas' class="text-center"></div>
 
                               <div id='scoreboard' class="text-center">
-                                <h1 id='scores'>Vie : x</h1>
-                                <h1 id='title'>Pong</h1>
+                                <h1 id='scores'>Vie(s) : x</h1>
                                 <h2 id='winnerBoard'></h2>
                                 <span id="chronotime">0:00:00:00</span>
                               </div>

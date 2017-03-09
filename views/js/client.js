@@ -89,6 +89,10 @@ function init() {
                     }
                     $('#chat').append('<li style="color:' + data[1][0] + ';">' + data[1][1] + '</li>');
                     break;
+
+                case 9:
+                    // Syncro data with modal scores
+                    break;
             }
         };
         socket.onclose = function (msg) {
@@ -131,6 +135,9 @@ function phase(id) {
             break;
         case 4:
             $('#phase').html("Score");
+            document.getElementById("gameCanvas").innerHTML = "";
+            $('#game-modal').modal('hide');
+            $('#score-modal').modal('show');
             break;
         case 5:
             $('#phase').html("Wait");

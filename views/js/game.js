@@ -65,8 +65,9 @@ function chronoStop(){
 // Point d'entree du Script
 function setup()
 {
+	document.getElementById("game_btn").style.display='none';
 	document.getElementById("winnerBoard").innerHTML = "Survivre";
-	document.getElementById("scores").innerHTML = "Vie : " + maxLife;
+	document.getElementById("scores").innerHTML = "Vie(s) : " + maxLife;
 
 	// Cree les elements 3d
 	createScene();
@@ -265,7 +266,7 @@ function ballPhysics()
 	if (ball.position.x <= -fieldWidth/2)
 	{
 		maxLife--;
-		document.getElementById("scores").innerHTML = "Vie : " + maxLife;
+		document.getElementById("scores").innerHTML = "Vie(s) : " + maxLife;
 		resetBall();
 		endCheck();
 	}
@@ -381,12 +382,12 @@ function endCheck()
 		ballSpeed = 0;
 		difficulty = 0;
 
-		document.getElementById("winnerBoard").innerHTML = "F5 pour rejouer";
+		document.getElementById("winnerBoard").innerHTML = "Attendre les autres joueurs";
 		chronoStop();
 
 		var time = document.getElementById("chronotime").innerHTML;
 		console.log(time);
 
-		// CALL HERE SCORE TO SERVER
+		send(format(6, time));
 	}
 }
