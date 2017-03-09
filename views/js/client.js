@@ -12,6 +12,10 @@ function format(type, data) {
     return [type, data];
 }
 
+function checkTitle() {
+    return document.title === "RISK";
+}
+
 function init() {
     var host = "ws://127.0.0.1:666"; // SET THIS TO YOUR SERVER
     try {
@@ -38,7 +42,7 @@ function init() {
                     //List player
                 case 3:
                     data[1].forEach(function (ps) {
-                        $('#joueurs').append('<p style="color:' + ps[0] + ';">' + ps[1] + '</p>');
+                        $('#joueurs').append('<span style="color:' + ps[0] + ';">' + ps[1] + ' </span>');
                     });
                     break;
                     //State
@@ -69,6 +73,22 @@ function init() {
                         $('#lblTrpPlnt'+planet[0]).html(planet[2]);
                     });
                 }
+
+                
+                if (checkTitle()) {
+                        data[1].forEach(function (ps) {
+                            if (ps[1] == true) {
+                                document.title = "Player " + ps[0] + " - " + document.title;
+                            }
+                        });
+                    }
+                    break;
+                case 7:
+                    if ($("#chat > div").length === 5) {
+                        $('#chat').find('div').first().remove();
+                    }
+                    $('#chat').append('<li style="color:' + data[1][0] + ';">' + data[1][1] + '</li>');
+                    break;
             }
         };
         socket.onclose = function (msg) {
