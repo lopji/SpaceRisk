@@ -68,10 +68,10 @@
                 <div class="col-md-3 col-md-offset-1 blog-sidebar">
                     <div class="sidebar-module">
                         <h4>Objectifs</h4>
-                        <div id="objectifs" class="bg-success">
-                            <p>-Conquérir 5 planètes</p>
-                            <p>-Ne pas décéder</p>
-                            <p>-Achever un ennemi</p>
+                        <div  class="bg-success">
+                            <ul id="objectifs">
+                                
+                            </ul>
                         </div>
                     </div>
                     <div class="sidebar-module">
