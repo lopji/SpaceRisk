@@ -32,29 +32,30 @@ function init() {
                 //Login
                 case 0:
                     break;
-                    //Logout
+                //Logout
                 case 1:
                     break;
-                    //Kick
+                //Kick
                 case 2:
                     kick();
                     break;
-                    //List player
+                //List player
                 case 3:
                     data[1].forEach(function (ps) {
                         $('#joueurs').append('<span style="color:' + ps[0] + ';">' + ps[1] + ' </span>');
                     });
                     break;
-                    //State
+                //State
                 case 4:
                     state(data[1]);
                     actualState = data[1];
                     break;
-                    //Troop
+                //Troop
                 case 5:
                     troops = data[1];
                     $('#troupes').html(data[1]);
                     break;
+                // DisplayTroops on planet
                 case 6:
                     if (firstInit) {
                         data[1].forEach(function (planet) {
@@ -81,11 +82,19 @@ function init() {
                         });
                     }
                     break;
+                // Chat
                 case 7:
                     if ($("#chat > div").length === 5) {
                         $('#chat').find('div').first().remove();
                     }
                     $('#chat').append('<li style="color:' + data[1][0] + ';">' + data[1][1] + '</li>');
+                    break;
+                case 8:
+                    data[1].forEach(function (ps) {
+                        $('#objectifs').append('<li>' + ps + '</li>');
+                    });
+                case 9:
+                    // Syncro data with modal scores
                     break;
             }
         };
@@ -124,9 +133,18 @@ function phase(id) {
             break;
         case 3:
             $('#phase').html("Game");
+            $('#game-modal').modal({backdrop: 'static', keyboard: false})
+            $('#game-modal').modal('show');
             break;
         case 4:
             $('#phase').html("Score");
+            document.getElementById("gameCanvas").innerHTML = "";
+            $('#game-modal').modal('hide');
+            $('#score-modal').modal('show');
+            $('#score-modal-body p').html("");  // TODO: Ajouter dans cette balise si le joueur a gagné ou perdu
+            $('#score-modal').click(function(){
+                send(format(1, ''));
+            });
             break;
         case 5:
             $('#phase').html("Wait");
@@ -204,6 +222,7 @@ $('#layer3 ellipse').on({
         }
 
         $(this).css('filter', 'url(#dropshadow)').css('stroke', '#ffffff');
+
 
     },
     mouseleave: function () {

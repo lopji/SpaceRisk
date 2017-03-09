@@ -1,6 +1,8 @@
 <?php
 
 require_once('./class/entity/player.php');
+require_once('./class/entity/objectives/defeat.php');
+require_once('./class/entity/objectives/number.php');
 
 class Instance {
 
@@ -10,14 +12,26 @@ class Instance {
     private $players = array();
     private $territorys = array();
     private $attacks = array();
+    private $finish;
+
+    private $versus = array(array());
+    private $resultTimeGame = array();
+    private $resultGame = array();
 
     public function __construct() {
+        $this->finish = false;
         $this->step = 0;
         $this->config = require_once('./config.php');
         $this->territorys = require_once('./class/map/default.php');
         for ($i = 0; $i < $this->config->server_info["nbPlayer"]; $i++) {
             array_push($this->players, new Player("Player " . $i));
-            $this->territorys[$i]->setPlayer($this->players[$i%2]);
+            $this->territorys[$i]->setPlayer($this->players[$i]);
+        }
+        $n = rand(1, $this->config->server_info["nbPlayer"] - 1);
+        for ($i = 0; $i < $this->config->server_info["nbPlayer"]; $i++) {
+            $id = (($i + $n) % $this->config->server_info["nbPlayer"]);
+            $this->players[$i]->addObjective(new Defeat($this->players[$id]));
+            $this->players[$i]->addObjective(new Number($this->players[$i], $this));
         }
         $this->player = $this->players[0];
         $this->player->setState(0);
@@ -127,29 +141,25 @@ class Instance {
 
     //New Round
     public function round() {
-        $this->nextPlayer();
+        $this->step++;
         if ($this->checkRound()) {
+            if ($this->player->checkObjectives()) {
+                $this->finish = TRUE;
+            }
+
             foreach ($this->players as $p) {
-                $nbTerritory = 0;
+                $nbTerritory = count($this->getTerritorysByPlayer($p));
                 $nbSysSolaire = 0;
-
-                foreach ($this->territorys as $ter) {
-                    if ($ter->getPlayer() == $p) {
-                        $nbTerritory++;
-                    }
-                }
-                // TODO: Calculer le nombre de système solaire
-
                 $p->setTroop($nbTerritory, $nbSysSolaire);
+                // TODO: Calculer le nombre de système solaire
             }
         }
-    }
 
-    public function nextPlayer() {
-        $this->step++;
-        $idPlayer = $this->step % $this->config->server_info["nbPlayer"];
-        $this->player = $this->players[$idPlayer];
-        $this->player->setState(0);
+        if (!$this->finish) {
+            $idPlayer = $this->step % $this->config->server_info["nbPlayer"];
+            $this->player = $this->players[$idPlayer];
+            $this->player->setState(0);
+        }
     }
 
     public function login($user, $id) {
@@ -197,6 +207,16 @@ class Instance {
         return $array;
     }
 
+    public function getTerritorysByPlayer($player) {
+        $array = [];
+        foreach ($this->territorys as $territory) {
+            if ($player->checkPlayer($territory->getPlayer())) {
+                array_push($array, $territory);
+            }
+        }
+        return $array;
+    }
+
     public function getPlayers() {
         $array = [];
         foreach ($this->players as $player) {
@@ -215,6 +235,67 @@ class Instance {
             $string .= $player;
         }
         return $string;
+    }
+
+    public function compareTime($t1,$t2){
+      list($h1, $m1, $s1, $ms1) = explode(":", $t1);
+      list($h2, $m2, $s2, $ms2) = explode(":", $t2);
+
+      if($h1>$h2){
+        return TRUE;
+      }elseif ($h2>$h1) {
+        return FALSE;
+      }else {
+        if ($m1>$m2) {
+          return TRUE;
+        } elseif ($m2>$m1) {
+          return FALSE;
+        }else
+        {
+          if ($s1>$s2) {
+            return TRUE;
+          }elseif ($s2>$s1) {
+            return FALSE;
+          } else {
+            if ($ms1>$ms2) {
+              return TRUE;
+            }else{
+              return FALSE;
+            }
+          }
+        }
+      }
+    }
+
+    public function addVersus($id1,$id2){
+      array_push($this->versus[$id1],$id2);
+      $this->resultTimeGame[$id1] = -1;
+      $this->resultTimeGame[$id2] = -1;
+      $this->resultGame[$id1][$id2]= -1;
+    }
+
+    public function addTime($id,$time){
+
+      $this->resultTimeGame[$id] = $time;
+      $token = 0;
+      foreach ($this->versus[$id] as $key => $idOpo) {
+          if($this->resultTimeGame[$idOpo]!= -1){
+            $this->resultGame[$id][$idOpo] = $this->compareTime($this->resultTimeGame[$id],$this->resultTimeGame[$idOpo]);
+            $this->resultGame[$idOpo][$id] = $this->compareTime($this->resultTimeGame[$idOpo],$this->resultTimeGame[$id]);
+          }
+      }
+    }
+
+    public function checkResultGame(){
+      $token = TRUE;
+      foreach ($this->resultGame as $key => $value) {
+          foreach ($value as $k => $v) {
+              if($v == -1){
+                $token = FALSE;
+              }
+          }
+      }
+      return $token;
     }
 
 }
