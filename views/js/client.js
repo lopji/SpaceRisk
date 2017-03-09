@@ -160,7 +160,6 @@ function grayFilterPhase(idPhase) {
 var self;
 $('#layer3 ellipse').on({
     mouseenter: function () {
-        //$(this).popover('destroy');
         self = $(this);
         switch (actualState) {
             //Déploiement de troupes
@@ -211,6 +210,7 @@ $('#layer3 ellipse').on({
         $(this).css('filter', '').css('stroke', '#000000');
     }
 });
+//ultra try hard!!!!!!!!!!
 $("body").click(function(e){
   $('#layer3 ellipse').each(function () {
         // hide any open popovers when the anywhere else in the body is clicked
@@ -218,4 +218,7 @@ $("body").click(function(e){
             $(this).popover('hide');
         }
     });
+});
+$("body").on('hidden.bs.popover', function(e){
+  $(e.target).data('bs.popover').inState.click = false;
 });
