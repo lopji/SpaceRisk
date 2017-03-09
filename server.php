@@ -80,7 +80,7 @@ class Server extends WebSocketServer {
             case 5:
                 $this->stdout("Attack");
                 $player = $this->instance->getPlayerByUser($user);
-                
+
                 break;
             /*
               //Deployment
