@@ -94,8 +94,9 @@ function init() {
                     data[1].forEach(function (ps) {
                         $('#objectifs').append('<li>' + ps + '</li>');
                     });
+                // Syncro data with modal scores
                 case 9:
-                    // Syncro data with modal scores
+                    
                     break;
             }
         };

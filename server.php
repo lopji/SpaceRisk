@@ -78,6 +78,7 @@ class Server extends WebSocketServer {
                     }
                 }
                 break;
+            // Attack
             case 5:
                 $this->stdout("Attack");
                 $player = $this->instance->getPlayerByUser($user);
@@ -89,11 +90,11 @@ class Server extends WebSocketServer {
                 }
                 //addVersus($id1,$id2)
                 break;
-
+            // Mini-Game
             case 6:
                 $this->stdout("Mini Game submit Time");
                 $player = $this->instance->getPlayerByUser($user);
-                $this->instance->addTime($player->getId(),$data[1]);
+                $this->instance->addTime($player,$data[1]);
                 break;
             
         }
