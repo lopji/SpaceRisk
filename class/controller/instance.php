@@ -1,6 +1,8 @@
 <?php
 
 require_once('./class/entity/player.php');
+require_once('./class/entity/objectives/defeat.php');
+require_once('./class/entity/objectives/number.php');
 
 class Instance {
 
@@ -10,14 +12,22 @@ class Instance {
     private $players = array();
     private $territorys = array();
     private $attacks = array();
+    private $finish;
 
     public function __construct() {
+        $this->finish = false;
         $this->step = 0;
         $this->config = require_once('./config.php');
         $this->territorys = require_once('./class/map/default.php');
         for ($i = 0; $i < $this->config->server_info["nbPlayer"]; $i++) {
             array_push($this->players, new Player("Player " . $i));
-            $this->territorys[$i]->setPlayer($this->players[$i%2]);
+            $this->territorys[$i]->setPlayer($this->players[$i % 2]);
+        }
+        $n = rand(1, $this->config->server_info["nbPlayer"] - 1);
+        for ($i = 0; $i < $this->config->server_info["nbPlayer"]; $i++) {
+            $id = (($i + $n) % $this->config->server_info["nbPlayer"]);
+            $this->players[$i]->addObjective(new Defeat($this->players[$id]));
+            $this->players[$i]->addObjective(new Number($this->players[$i], $this));
         }
         $this->player = $this->players[0];
         $this->player->setState(0);
@@ -127,29 +137,25 @@ class Instance {
 
     //New Round
     public function round() {
-        $this->nextPlayer();
+        $this->step++;
         if ($this->checkRound()) {
+            if ($this->player->checkObjectives()) {
+                $this->finish = TRUE;
+            }
+
             foreach ($this->players as $p) {
-                $nbTerritory = 0;
+                $nbTerritory = count($this->getTerritorysByPlayer($p));
                 $nbSysSolaire = 0;
-
-                foreach ($this->territorys as $ter) {
-                    if ($ter->getPlayer() == $p) {
-                        $nbTerritory++;
-                    }
-                }
-                // TODO: Calculer le nombre de système solaire
-
                 $p->setTroop($nbTerritory, $nbSysSolaire);
+                // TODO: Calculer le nombre de système solaire
             }
         }
-    }
 
-    public function nextPlayer() {
-        $this->step++;
-        $idPlayer = $this->step % $this->config->server_info["nbPlayer"];
-        $this->player = $this->players[$idPlayer];
-        $this->player->setState(0);
+        if (!$this->finish) {
+            $idPlayer = $this->step % $this->config->server_info["nbPlayer"];
+            $this->player = $this->players[$idPlayer];
+            $this->player->setState(0);
+        }
     }
 
     public function login($user, $id) {
@@ -193,6 +199,16 @@ class Instance {
         $array = [];
         foreach ($this->territorys as $territory) {
             array_push($array, array($territory->getId(), $territory->checkPlayer($player), $territory->getTroop()));
+        }
+        return $array;
+    }
+
+    public function getTerritorysByPlayer($player) {
+        $array = [];
+        foreach ($this->territorys as $territory) {
+            if ($player->checkPlayer($territory->getPlayer())) {
+                array_push($array, $territory);
+            }
         }
         return $array;
     }
