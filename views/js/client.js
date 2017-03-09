@@ -89,6 +89,7 @@ function init() {
                     }
                     $('#chat').append('<li style="color:' + data[1][0] + ';">' + data[1][1] + '</li>');
                     break;
+                // Objectifs
                 case 8:
                     data[1].forEach(function (ps) {
                         $('#objectifs').append('<li>' + ps + '</li>');

@@ -81,45 +81,14 @@ class Server extends WebSocketServer {
             case 5:
                 $this->stdout("Attack");
                 $player = $this->instance->getPlayerByUser($user);
-
+                if($this->instance->attack($player, $data[1][0], $data[1][1], $data[1][2])){
+                     foreach ($this->users as $u) {
+                        $p = $this->instance->getPlayerByUser($u);
+                        $this->send($u, json_encode(array(6, $this->instance->getViewTerritorysByPlayer($p))));
+                    }
+                }
                 break;
-            /*
-              //Deployment
-              case 1:
-              $player = $this->instance->deployment($user, $data[1]);
-              if ($player != NULL) {
-              $this->send($user, json_encode(array(4, $player->getState())));
-              }
-              break;
-              //Move
-              case 2:
-              $player = $this->instance->move($user);
-              if ($player != NULL) {
-              $this->send($user, json_encode(array(4, $player->getState())));
-              }
-              break;
-              //Attack
-              case 3:
-              $player = $this->instance->attack($user);
-              if ($player != NULL) {
-              $this->send($user, json_encode(array(4, $player->getState())));
-              }
-              break;
-              //Game
-              case 4:
-              $player = $this->instance->game($user);
-              if ($player != NULL) {
-              $this->send($user, json_encode(array(4, $player->getState())));
-              }
-              break;
-              //Score
-              case 5:
-              $player = $this->instance->score($user);
-              if ($player != NULL) {
-              $this->send($user, json_encode(array(4, $player->getState())));
-              $this->send($this->instance->getPlayer()->getUser(), json_encode(array(4, $this->instance->getPlayer()->getState())));
-              }
-              break; */
+            
         }
     }
 
