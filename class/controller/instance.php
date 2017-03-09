@@ -17,7 +17,7 @@ class Instance {
         $this->territorys = require_once('./class/map/default.php');
         for ($i = 0; $i < $this->config->server_info["nbPlayer"]; $i++) {
             array_push($this->players, new Player("Player " . $i));
-            $this->territorys[$i]->setPlayer($this->players[$i]%2);
+            $this->territorys[$i]->setPlayer($this->players[$i]);
         }
         $this->player = $this->players[0];
         $this->player->setState(0);

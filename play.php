@@ -44,24 +44,26 @@
                     </div>
 
                 </div>
-                <div class="modal fade" id="combatModal" tabindex="-1" role="dialog">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">Minigame time</h4>
-                            </div>
-                            <div class="modal-body">
-                                <p>Vos troupes : </p>
-                                <p>Troupes ennemies : </p>
-                                <p><b>Combattre ?</b></p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-link" data-dismiss="modal">Nope</button>
-                                <button type="button" class="btn btn-danger">Launch game</button>
-                            </div>
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
-                </div><!-- /.modal -->
+                
+                <!-- Modal score -->
+                <div id="score-modal" class="modal fade" role="dialog" data-backdrop="static">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title text-center">Score</h4>
+                      </div>
+                      <div id ="score-modal-body" class="modal-body">
+                        <p></p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" id="score-close" class="btn btn-default" data-dismiss="modal">Ok</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
 
                 <div class="col-md-3 col-md-offset-1 blog-sidebar">
                     <div class="sidebar-module">

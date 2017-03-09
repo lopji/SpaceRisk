@@ -127,6 +127,11 @@ function phase(id) {
             break;
         case 4:
             $('#phase').html("Score");
+            $('#score-modal').modal('show');
+            $('#score-modal-body p').html("");  // TODO: Ajouter dans cette balise si le joueur a gagné ou perdu
+            $('#score-modal').click(function(){
+                send(format(1, ''));
+            });
             break;
         case 5:
             $('#phase').html("Wait");
