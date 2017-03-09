@@ -1,6 +1,6 @@
 <?php ?>
 <!DOCTYPE html>
-<html lang="en">
+    <html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,7 +24,7 @@
     <body onload="init()">
         <div class="container">
             <div class="row">
-                <div id="joueurs" class="col-md-4">
+                <div  id="joueurs" class="col-md-4">
                 </div>
                 <div
                     class="col-md-4">
@@ -42,8 +42,27 @@
                         require_once './views/ressources/map/svg.php';
                         ?>
                     </div>
+                    
                 </div>
-
+                <div class="modal fade" id="combatModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Minigame time</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>Vos troupes : </p>
+                      <p>Troupes ennemies : </p>
+                      <p><b>Combattre ?</b></p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-link" data-dismiss="modal">Nope</button>
+                      <button type="button" class="btn btn-danger">Launch game</button>
+                    </div>
+                  </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+              </div><!-- /.modal -->
+              
                 <div class="col-md-3 col-md-offset-1 blog-sidebar">
                     <div class="sidebar-module">
                         <h4>Objectifs</h4>
@@ -108,5 +127,6 @@
     </body>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="./views/js/bootstrap.min.js"></script>
     <script src="./views/js/client.js"></script>
 </html>
