@@ -186,8 +186,18 @@ class Instance {
         return $this->step % $this->config->server_info["nbPlayer"] == 0;
     }
 
-    public function addAttack($id1, $id2, $troop) {
-        array_push($this->attacks, array($id1, $id2, $troop));
+    private function addAttack($id1, $id2, $troop) {
+        $new = true;
+        foreach ($this->attacks as $attack) {
+            if (($id1 == $attack[0]) && ($id2 == $attack[1])) {
+                $attack[2] += $troop;
+                $new = FALSE;
+                break;
+            }
+        }
+        if ($new) {
+            array_push($this->attacks, array($id1, $id2, $troop));
+        }
     }
 
     public function getPlayerByUser($user) {
