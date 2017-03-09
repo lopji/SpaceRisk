@@ -23,6 +23,7 @@ class Server extends WebSocketServer {
                     $this->send($user, json_encode(array(3, $this->instance->getPlayers())));
                     $this->send($user, json_encode(array(4, $player->getState())));
                     $this->send($user, json_encode(array(5, $player->getTroop())));
+                    $this->send($user, json_encode(array(8, $player->getObjectives())));
                     $this->send($user, json_encode(array(6, $this->instance->getViewTerritorysByPlayer($player))));
                 } else {
                     $this->send($user, json_encode(array(2)));

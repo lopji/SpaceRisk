@@ -3,7 +3,7 @@
 class Player {
 
     const DEFAULT_TROOPS = 20;
-    
+
     private $id;
     private $user;
     private $connected;
@@ -11,11 +11,14 @@ class Player {
     private $troop;
     private $pseudo;
     private $color;
+    private $lose;
+    private $objectives = [];
 
     public function __construct($pseudo) {
         $this->id = -1;
         $this->user = null;
         $this->connected = FALSE;
+        $this->lose = FALSE;
         $this->state = 5;
         $this->troop = self::DEFAULT_TROOPS;
         $this->pseudo = $pseudo;
@@ -46,6 +49,15 @@ class Player {
         return FALSE;
     }
 
+    public function checkObjectives() {
+        foreach ($this->objectives as $objective) {
+            if(!$objective->check){
+                return FALSE;
+            }
+        }
+        return TRUE;
+    }
+
     public function checkUser($user) {
         return $this->user->id == $user->id;
     }
@@ -54,8 +66,16 @@ class Player {
         return $this->id == $id || $this->id == -1;
     }
 
+    public function addObjective($objective) {
+        array_push($this->objectives, $objective);
+    }
+
     public function isConnected() {
         return $this->connected;
+    }
+
+    public function isLose() {
+        return $this->lose;
     }
 
     public function setState($state) {
@@ -81,11 +101,19 @@ class Player {
     public function getColor() {
         return $this->color;
     }
-    
-    public function setTroop($nbTerritory, $nbSysSolaire){
+
+    public function getObjectives() {
+        $array = [];
+        foreach ($this->objectives as $objective) {
+            array_push($array, (string) $objective);
+        }
+        return $array;
+    }
+
+    public function setTroop($nbTerritory, $nbSysSolaire) {
         //TODO: Prendre en compte le bonus du nombre de système solaire
         //      Prevoir de prendre en compte quel système solaire on aurait
-        $this->troop = intval(self::DEFAULT_TROOPS + (0.5 * $nbTerritory) + (0.25 * self::DEFAULT_TROOPS)*$nbSysSolaire);
+        $this->troop = intval(self::DEFAULT_TROOPS + (0.5 * $nbTerritory) + (0.25 * self::DEFAULT_TROOPS) * $nbSysSolaire);
     }
 
     public function getTroop() {
