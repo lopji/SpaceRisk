@@ -81,7 +81,13 @@ class Server extends WebSocketServer {
             case 5:
                 $this->stdout("Attack");
                 $player = $this->instance->getPlayerByUser($user);
+                //addVersus($id1,$id2)
+                break;
 
+            case 6:
+                $this->stdout("Mini Game submit Time");
+                $player = $this->instance->getPlayerByUser($user);
+                $this->instance->addTime($player->getId(),$data[1]);
                 break;
             /*
               //Deployment
@@ -124,7 +130,7 @@ class Server extends WebSocketServer {
     }
 
     protected function connected($user) {
-        
+
     }
 
     protected function closed($user) {

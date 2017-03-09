@@ -14,6 +14,10 @@ class Instance {
     private $attacks = array();
     private $finish;
 
+    private $versus = array(array());
+    private $resultTimeGame = array();
+    private $resultGame = array();
+
     public function __construct() {
         $this->finish = false;
         $this->step = 0;
@@ -231,6 +235,67 @@ class Instance {
             $string .= $player;
         }
         return $string;
+    }
+
+    public function compareTime($t1,$t2){
+      list($h1, $m1, $s1, $ms1) = explode(":", $t1);
+      list($h2, $m2, $s2, $ms2) = explode(":", $t2);
+
+      if($h1>$h2){
+        return TRUE;
+      }elseif ($h2>$h1) {
+        return FALSE;
+      }else {
+        if ($m1>$m2) {
+          return TRUE;
+        } elseif ($m2>$m1) {
+          return FALSE;
+        }else
+        {
+          if ($s1>$s2) {
+            return TRUE;
+          }elseif ($s2>$s1) {
+            return FALSE;
+          } else {
+            if ($ms1>$ms2) {
+              return TRUE;
+            }else{
+              return FALSE;
+            }
+          }
+        }
+      }
+    }
+
+    public function addVersus($id1,$id2){
+      array_push($this->versus[$id1],$id2);
+      $this->resultTimeGame[$id1] = -1;
+      $this->resultTimeGame[$id2] = -1;
+      $this->resultGame[$id1][$id2]= -1;
+    }
+
+    public function addTime($id,$time){
+
+      $this->resultTimeGame[$id] = $time;
+      $token = 0;
+      foreach ($this->versus[$id] as $key => $idOpo) {
+          if($this->resultTimeGame[$idOpo]!= -1){
+            $this->resultGame[$id][$idOpo] = $this->compareTime($this->resultTimeGame[$id],$this->resultTimeGame[$idOpo]);
+            $this->resultGame[$idOpo][$id] = $this->compareTime($this->resultTimeGame[$idOpo],$this->resultTimeGame[$id]);
+          }
+      }
+    }
+
+    public function checkResultGame(){
+      $token = TRUE;
+      foreach ($this->resultGame as $key => $value) {
+          foreach ($value as $k => $v) {
+              if($v == -1){
+                $token = FALSE;
+              }
+          }
+      }
+      return $token;
     }
 
 }

@@ -93,6 +93,8 @@ function init() {
                     data[1].forEach(function (ps) {
                         $('#objectifs').append('<li>' + ps + '</li>');
                     });
+                case 9:
+                    // Syncro data with modal scores
                     break;
             }
         };
@@ -131,9 +133,13 @@ function phase(id) {
             break;
         case 3:
             $('#phase').html("Game");
+            $('#game-modal').modal({backdrop: 'static', keyboard: false})
+            $('#game-modal').modal('show');
             break;
         case 4:
             $('#phase').html("Score");
+            document.getElementById("gameCanvas").innerHTML = "";
+            $('#game-modal').modal('hide');
             $('#score-modal').modal('show');
             $('#score-modal-body p').html("");  // TODO: Ajouter dans cette balise si le joueur a gagné ou perdu
             $('#score-modal').click(function(){
@@ -210,6 +216,7 @@ $('#layer3 ellipse').on({
                                 data-toggle='modal' data-target='#combatModal'\n\
                                 move_to = " + self.attr('id') + ";'>\n\
                                 Déplacer/Attaquer</button></div>";
+
                     $(this).popover({container: 'body', html: true, content: content, title: troops + ' troupes',
                         template: '<div class="popover" role="tooltip"><div class="arrow"></div>' +
                                 '<h3 class="popover-title"></h3><div class="popover-content"></div></div>'});
@@ -218,6 +225,7 @@ $('#layer3 ellipse').on({
         }
 
         $(this).css('filter', 'url(#dropshadow)').css('stroke', '#ffffff');
+
 
     },
     mouseleave: function () {
