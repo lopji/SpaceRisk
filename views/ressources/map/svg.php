@@ -421,48 +421,6 @@
         inkscape:label="planètes"
         style="display:inline">
         <ellipse
-            style="opacity:0;fill:#000000;fill-opacity:1;fill-rule:nonzero"
-            id="path6690"
-            cx="-46.467022"
-            cy="645.09961"
-            rx="193.94933"
-            ry="161.62442" />
-        <ellipse
-            style="opacity:0;fill:#000000;fill-opacity:1;fill-rule:nonzero"
-            id="path6692"
-            cx="-255.56862"
-            cy="624.89655"
-            rx="186.87823"
-            ry="58.588852" />
-        <ellipse
-            style="opacity:0;fill:#000000;fill-opacity:1;fill-rule:nonzero"
-            id="path6694"
-            cx="-385.87833"
-            cy="306.69846"
-            rx="64.649773"
-            ry="160.61427" />
-        <ellipse
-            style="opacity:0;fill:#360000;fill-opacity:1;fill-rule:nonzero"
-            id="path6696"
-            cx="425.27429"
-            cy="403.6731"
-            rx="87.883278"
-            ry="77.781754" />
-        <ellipse
-            style="opacity:0;fill:#360000;fill-opacity:1;fill-rule:nonzero"
-            id="path6698"
-            cx="389.91895"
-            cy="328.92181"
-            rx="76.771599"
-            ry="65.65992" />
-        <ellipse
-            style="opacity:0;fill:#360000;fill-opacity:1;fill-rule:nonzero"
-            id="path6700"
-            cx="197.98993"
-            cy="425.89645"
-            rx="117.17771"
-            ry="146.47214" />
-        <ellipse
             style="display:inline;fill:url(#radialGradient5251-3);fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.00000024;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
             id="1"
             cx="649.16833"
