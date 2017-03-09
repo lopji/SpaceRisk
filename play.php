@@ -42,7 +42,7 @@
                         require_once './views/ressources/map/svg.php';
                         ?>
                     </div>
-                    
+
                 </div>
                 <div class="modal fade" id="combatModal" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
@@ -62,7 +62,7 @@
                   </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
               </div><!-- /.modal -->
-              
+
                 <div class="col-md-3 col-md-offset-1 blog-sidebar">
                     <div class="sidebar-module">
                         <h4>Objectifs</h4>
@@ -116,6 +116,35 @@
                         <img src="./views/ressources/end.png" alt="rocket" width="60px" height="60px" >
                     </div>
                 </div>
+
+                <!-- Large modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>
+
+                <div class="modal fade bs-example-modal-lg" id="game-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static" data-keyboard="false">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+
+                      <div class="modal-header">
+                              <h4 class="modal-title" id="myModalLabel">Game</h4>
+                      </div>
+                        <div class="modal-body text-center">
+                              <button type="button" class="btn btn-primary" onclick="setup();"> Start</button>
+                              <div id='gameCanvas' class="text-center"></div>
+
+                              <div id='scoreboard' class="text-center">
+                                <h1 id='scores'>Vie : x</h1>
+                                <h1 id='title'>Pong</h1>
+                                <h2 id='winnerBoard'></h2>
+                                <span id="chronotime">0:00:00:00</span>
+                              </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
             </div>
             <!-- /.container -->
 
@@ -129,4 +158,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="./views/js/bootstrap.min.js"></script>
     <script src="./views/js/client.js"></script>
+    <!-- Mini Game -->
+    <script src='./views/js/three.min.js'></script>
+    <script src='./views/js/keyboard.js'></script>
+    <script src='./views/js/game.js'></script>
 </html>

@@ -74,7 +74,7 @@ function init() {
                     });
                 }
 
-                
+
                 if (checkTitle()) {
                         data[1].forEach(function (ps) {
                             if (ps[1] == true) {
@@ -126,6 +126,8 @@ function phase(id) {
             break;
         case 3:
             $('#phase').html("Game");
+            $('#game-modal').modal({backdrop: 'static', keyboard: false})
+            $('#game-modal').modal('show');
             break;
         case 4:
             $('#phase').html("Score");
@@ -206,7 +208,7 @@ $('#layer3 ellipse').on({
               }
           break;
       }
-      
+
       $(this).css('filter', 'url(#dropshadow)').css('stroke', '#ffffff');
 
     },
