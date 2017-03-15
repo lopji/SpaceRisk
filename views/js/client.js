@@ -115,6 +115,7 @@ function makeSVG(tag, attrs) {
     var el = document.createElementNS('http://www.w3.org/2000/svg', tag);
     for (var k in attrs)
         el.setAttribute(k, attrs[k]);
+    el.style.pointerEvents = "none";
     return el;
 }
 
@@ -138,7 +139,7 @@ function phase(id) {
             break;
         case 3:
             $('#phase').html("Game");
-            $('#game-modal').modal({backdrop: 'static', keyboard: false})
+            $('#game-modal').modal({backdrop: 'static', keyboard: false});
             $('#game-modal').modal('show');
             break;
         case 4:
@@ -204,6 +205,7 @@ $('#layer3 ellipse').on({
             //Déplacement
             case 1:
                 if(move_first){
+                  $(this).popover('destroy');
                   var content = '<div class="select"><select id="sel-move_from" class="form-control">';
                   tr = $('#lblTrpPlnt' + self.attr('id')).html();
                   for (var i = 1; i <= tr; i++) {
