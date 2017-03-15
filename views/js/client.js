@@ -225,7 +225,9 @@ $('#layer3 ellipse').on({
                 else{
                   if (parseInt(self.attr('id')) !== move_from) {
                       var content = "<button type='button' id='btnSend' class='btn btn-primary' onClick='send(format(4, [move_from, " + self.attr('id') + " , troops]));\n\
-                      $(\"#lblTrpPlnt + "+self.attr('id')+"\").html(\"" + (tr + troops)+"\");' move_first = true;'>Déplacer</button></div>";
+                      $(\"#lblTrpPlnt"+self.attr('id')+"\").html(\"\").html(\"" + (parseInt(tr) + parseInt(troops))+"\");\n\
+                      $(\"#lblTrpPlnt"+move_from+"\").html(\"" + (parseInt($('#lblTrpPlnt' + move_from).html()) - parseInt(troops))+"\");\n\
+                      ' move_first = true;'>Déplacer</button></div>";
                       $(this).popover({container: 'body', html: true, content: content, title: troops + ' troupes',
                           template: '<div class="popover" role="tooltip"><div class="arrow"></div>' +
                                   '<h3 class="popover-title"></h3><div class="popover-content"></div></div>'});
