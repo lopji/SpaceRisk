@@ -183,8 +183,10 @@ function grayFilterPhase(idPhase) {
 
 var self;
 $('#layer3 ellipse').on({
+    click: function(){
+      self = $(this);
+    },
     mouseenter: function () {
-        self = $(this);
         switch (actualState) {
             //Déploiement de troupes
             case 0:
