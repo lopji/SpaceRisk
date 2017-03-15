@@ -115,6 +115,12 @@ function SendAllAttacks(){
     attacks = [];
 }
 
+function addAttack(pl1, pl2, trps){
+    attacks = attacks.concat([pl1, pl2, trps]);
+    troops = 0;
+    $('#troupes').html("Attaque avec " + trps + " troupes planifiée");
+}
+
 function makeSVG(tag, attrs) {
     var el = document.createElementNS('http://www.w3.org/2000/svg', tag);
     for (var k in attrs)
@@ -216,7 +222,7 @@ $('#layer3 ellipse').on({
                   content += "</select><button type='button' id='btnSendMoveFrom' class='btn btn-primary'"+
                                   "onClick='troops = $(\"#sel-move_from\").val();"+
                                   "move_from = " + self.attr('id') + "; move_first = false;'>Sélectionner troupes</button></div>";
-                  $(this).popover({container: 'body', html: true, content: content, title: 'Select',
+                  $(this).popover({container: 'body', html: true, content: content, title: 'Select for moving',
                       template: '<div class="popover" role="tooltip"><div class="arrow"></div>' +
                               '<h3 class="popover-title"></h3><div class="popover-content"></div></div>'});
 
@@ -227,7 +233,7 @@ $('#layer3 ellipse').on({
                       var content = "<button type='button' id='btnSend' class='btn btn-primary' onClick='send(format(4, [move_from, " + self.attr('id') + " , troops]));\n\
                       $(\"#lblTrpPlnt"+self.attr('id')+"\").html(\"\").html(\"" + (parseInt(tr) + parseInt(troops))+"\");\n\
                       $(\"#lblTrpPlnt"+move_from+"\").html(\"" + (parseInt($('#lblTrpPlnt' + move_from).html()) - parseInt(troops))+"\");\n\
-                      ' move_first = true;'>Déplacer</button></div>";
+                      move_first = true;'>Déplacer</button></div>";
                       $(this).popover({container: 'body', html: true, content: content, title: troops + ' troupes',
                           template: '<div class="popover" role="tooltip"><div class="arrow"></div>' +
                                   '<h3 class="popover-title"></h3><div class="popover-content"></div></div>'});
@@ -244,17 +250,17 @@ $('#layer3 ellipse').on({
                       content += '<option value="' + i + '">' + i + '</option>';
                   }
                   content += "</select><button type='button' id='btnSendAttackFrom' class='btn btn-primary'"+
-                                  "onClick='troops = $(\"#sel-move_from\").val();"+
+                                  "onClick='troops = $(\"#sel-attack_from\").val();"+
                                   "attack_from = " + self.attr('id') + "; move_first = false;'>Sélectionner troupes</button></div>";
-                  $(this).popover({container: 'body', html: true, content: content, title: 'Select',
+                  $(this).popover({container: 'body', html: true, content: content, title: 'Select for attack',
                       template: '<div class="popover" role="tooltip"><div class="arrow"></div>' +
                               '<h3 class="popover-title"></h3><div class="popover-content"></div></div>'});
 
                 }
                 //Déplacement : Sélection de la 2ème planète
                 else{
-                  if (parseInt(self.attr('id')) !== move_from) {
-                      var content = "<button type='button' id='btnSend' class='btn btn-primary' onClick='attacks = attacks.concat([move_from, self.attr('id'), troops]); move_first = true;'>Attaquer</button></div>";
+                  if (parseInt(self.attr('id')) !== attack_from) {
+                      var content = "<button type='button' id='btnSend' class='btn btn-primary' onClick='addAttack("+attack_from+","+ self.attr('id')+","+ troops+"); move_first = true;'>Attaquer</button></div>";
                       $(this).popover({container: 'body', html: true, content: content, title: troops + ' troupes',
                           template: '<div class="popover" role="tooltip"><div class="arrow"></div>' +
                                   '<h3 class="popover-title"></h3><div class="popover-content"></div></div>'});
