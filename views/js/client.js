@@ -1,6 +1,6 @@
 var socket;
 
-var troops;
+var troops; //variable pour boucle du select dans popover
 var seltroops;
 var move_from;
 var actualState = 5;
@@ -50,10 +50,14 @@ function init() {
                     state(data[1]);
                     actualState = data[1];
                     break;
-                //Troop
+                //update player's nb of troops
                 case 5:
                     troops = data[1];
                     $('#troupes').html(data[1]);
+                    $('#sel-deploy').html('');
+                    for (var i = 1; i <= troops; i++) {
+                        $('#sel-deploy').append('<option value="' + i + '">' + i + '</option>');
+                    }
                     break;
                 // DisplayTroops on planet
                 case 6:
@@ -93,6 +97,7 @@ function init() {
                     data[1].forEach(function (ps) {
                         $('#objectifs').append('<li>' + ps + '</li>');
                     });
+                    break;
                 case 9:
                     // Syncro data with modal scores
                     break;
@@ -182,7 +187,9 @@ $('#layer3 ellipse').on({
         switch (actualState) {
             //Déploiement de troupes
             case 0:
-                var content = '<div class="select"><select id="sel-deploy" class="form-control">';
+              $(this).popover('destroy');
+              //contenu du popover
+              var content = '<div class="select"><select id="sel-deploy" class="form-control">';
                 for (var i = 1; i <= troops; i++) {
                     content += '<option value="' + i + '">' + i + '</option>';
                 }
@@ -191,6 +198,7 @@ $('#layer3 ellipse').on({
                 $(this).popover({container: 'body', html: true, content: content, title: 'Deploy',
                     template: '<div class="popover" role="tooltip"><div class="arrow"></div>' +
                             '<h3 class="popover-title"></h3><div class="popover-content"></div></div>'});
+
 
                 break;
             //Déplacement
