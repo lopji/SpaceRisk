@@ -30,8 +30,8 @@
                     class="col-md-4">
                     <h2 id="phase"></h2>
                 </div>
-                <div class="col-md-4"><div id="troupes">
-                        <img src="./views/ressources/rocketship.svg" alt="rocket" width="40px" height="40px"></span> <span id="troop">0</span>
+                <div class="col-md-4"><div id="troupes" style="display: inline-block;">
+                        <span id="troop">0</span> <img src="./views/ressources/rocketship.svg" alt="rocket" width="40px" height="40px">
                     </div>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                     </div>
 
                 </div>
-                
+
                 <!-- Modal score -->
                 <div id="score-modal" class="modal fade" role="dialog" data-backdrop="static">
                   <div class="modal-dialog">
@@ -70,7 +70,7 @@
                         <h4>Objectifs</h4>
                         <div  class="bg-success">
                             <ul id="objectifs">
-                                
+
                             </ul>
                         </div>
                     </div>
