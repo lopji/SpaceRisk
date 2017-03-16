@@ -93,7 +93,7 @@ class Server extends WebSocketServer {
             // Mini-Game
             case 6:
                 $this->stdout("Mini Game submit Time");
-                $player = $this->instance->getPlayerByUser($user);
+                $player = $this->instance->getPlayerByUser($user);                
                 $this->instance->addTime($player,$data[1]);
                 break;
             
