@@ -17,7 +17,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="map_final.svg">
+   sodipodi:docname="map_final2.svg">
   <defs
      id="defs4">
     <linearGradient
@@ -988,7 +988,7 @@
          id="feGaussianBlur4484" />
       <feComposite
          in2="result1"
-         operator="arithmetic"
+         operator="in"
          in="fbSourceGraphic"
          k2="0.5"
          k3="0.5"
@@ -1513,11 +1513,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.36621694"
-     inkscape:cx="442.5534"
-     inkscape:cy="380.94193"
+     inkscape:zoom="0.51790896"
+     inkscape:cx="215.36804"
+     inkscape:cy="477.45036"
      inkscape:document-units="px"
-     inkscape:current-layer="layer9"
+     inkscape:current-layer="layer8"
      showgrid="false"
      units="px"
      inkscape:window-width="1366"
@@ -1646,8 +1646,7 @@
   <g
      inkscape:groupmode="layer"
      id="layer8"
-     inkscape:label="galaxy trou noir"
-     sodipodi:insensitive="true">
+     inkscape:label="galaxy trou noir">
     <ellipse
        style="fill:none;fill-rule:evenodd;stroke:#72ffc6;stroke-width:13.35211658;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter4480)"
        id="path4409"
@@ -1668,9 +1667,10 @@
   <g
      inkscape:groupmode="layer"
      id="layer9"
-     inkscape:label="galaxy north star">
+     inkscape:label="galaxy north star"
+     sodipodi:insensitive="true">
     <path
-       style="opacity:0.598;fill:#d53939;fill-opacity:0;fill-rule:evenodd;stroke:#59ff00;stroke-width:3.0001812;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;filter:url(#filter5028)"
+       style="opacity:0.59799996;fill:#d53939;fill-opacity:0;fill-rule:evenodd;stroke:#59ff00;stroke-width:3.0001812;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;filter:url(#filter5028)"
        d="m 613.42525,397.16745 63.41559,42.69 98.94154,93.52008 15.74994,96.86647 159.9329,47.43772 33.8841,-111.13981 -208.46089,-32.04892"
        id="path4371"
        inkscape:connector-curvature="0"
