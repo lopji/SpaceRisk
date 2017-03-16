@@ -90,6 +90,8 @@ class Instance {
                 $troop2 = $this->territorys[$id2]->getTroop();
                 $this->territorys[$id1]->removeTroop($troop1);
 
+                // TODO: Comparer les temps et attribuer le bonus en conséquence
+                
                 if ($troop1 == $troop2) {
                     $this->territorys[$id2]->setTroop(1);
                 } else if ($troop1 > $troop2) {
@@ -186,8 +188,18 @@ class Instance {
         return $this->step % $this->config->server_info["nbPlayer"] == 0;
     }
 
-    public function addAttack($id1, $id2, $troop) {
-        array_push($this->attacks, array($id1, $id2, $troop));
+    private function addAttack($id1, $id2, $troop) {
+        $new = true;
+        foreach ($this->attacks as $attack) {
+            if (($id1 == $attack[0]) && ($id2 == $attack[1])) {
+                $attack[2] += $troop;
+                $new = FALSE;
+                break;
+            }
+        }
+        if ($new) {
+            array_push($this->attacks, array($id1, $id2, $troop, -1));
+        }
     }
 
     public function getPlayerByUser($user) {
@@ -266,17 +278,20 @@ class Instance {
         }
       }
     }
-
+/*
     public function addVersus($id1,$id2){
       array_push($this->versus[$id1],$id2);
       $this->resultTimeGame[$id1] = -1;
       $this->resultTimeGame[$id2] = -1;
       $this->resultGame[$id1][$id2]= -1;
     }
-
-    public function addTime($id,$time){
-
-      $this->resultTimeGame[$id] = $time;
+*/
+    public function addTime($player,$time){
+      $player->setTime($time);
+      
+      // TODO: Adapter les variables resultGame au tableau attacks
+      
+      //$this->resultTimeGame[$id] = $time;
       $token = 0;
       foreach ($this->versus[$id] as $key => $idOpo) {
           if($this->resultTimeGame[$idOpo]!= -1){
