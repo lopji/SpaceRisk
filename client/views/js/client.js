@@ -9,6 +9,8 @@ var tmap = 0;
 var move_first = true;
 var stroke_color;
 
+var originalModal = $('#game-modal').html();
+
 function format(type, data) {
     return [type, data];
 }
@@ -142,6 +144,8 @@ function phase(id) {
             break;
         case 3:
             $('#phase').html("Game");
+            $('#game-modal').html(originalModal);
+            console.log(originalModal);
             $('#game-modal').modal({backdrop: 'static', keyboard: false})
             $('#game-modal').modal('show');
             break;
