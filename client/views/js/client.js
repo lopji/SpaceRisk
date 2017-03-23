@@ -184,6 +184,7 @@ function grayFilterPhase(idPhase) {
 var self;
 $('#layer3 ellipse').on({
     mouseenter: function () {
+        $(this).popover('destroy');
         self = $(this);
         switch (actualState) {
             //Déploiement de troupes

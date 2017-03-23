@@ -66,7 +66,6 @@ function init() {
                     console.log('data: '+data);
                     if (firstInit) {
                         data[1].forEach(function (planet) {
-                            console.log('test: #' + planet[0]);
                             var txt = makeSVG('text', {x: $('#' + planet[0]).attr('cx'), id: 'lblTrpPlnt' + planet[0],
                                 y: $('#' + planet[0]).attr('cy'), fill: 'white', 'text-anchor': 'middle',
                                 'font-family': 'sans-serif', 'font-size': '20px'});
@@ -104,7 +103,7 @@ function init() {
 //dg-movement-end
                     break;
                 case 9:
-                    
+
                     break;
             }
         };
@@ -118,7 +117,7 @@ function init() {
 
 function SendAllAttacks(){
     attacks.forEach(function(att){
-        send(5, format(att[0], att[1] ,att[2], att[3])); 
+        send(5, format(att[0], att[1] ,att[2], att[3]));
     });
     attacks = [];
 }
@@ -286,7 +285,7 @@ $('#layer3 ellipse').on({
                   }
                 }
                 break;
-            
+
             //Attends
              case 3:
                 $(this).popover('destroy');
