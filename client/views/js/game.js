@@ -65,6 +65,9 @@ function chronoStop(){
 // Point d'entree du Script
 function setup()
 {
+	 difficulty = 0.5;
+	 maxLife = 2;
+
 	document.getElementById("game_btn").style.display='none';
 	document.getElementById("winnerBoard").innerHTML = "Survivre";
 	document.getElementById("scores").innerHTML = "Vie(s) : " + maxLife;
@@ -108,25 +111,31 @@ function createScene()
 
 	//Surface de jeu
 	var planeWidth = fieldWidth;
-	var	planeHeight = fieldHeight;
-	var	planeQuality = 10;
+	var planeHeight = fieldHeight;
+	var planeQuality = 10;
+
+        //Texture importées
+        var textureBall = new THREE.TextureLoader().load("./views/ressources/s_terre.png");
+        var texturePaddle = new THREE.TextureLoader().load("./views/ressources/p_neptune.jpg");
+        var textureCanon = new THREE.TextureLoader().load("./views/ressources/p_venus.jpg");
+        var texturePlane = new THREE.TextureLoader().load("./views/ressources/s_moon.jpg");
 
 	// Create les textures pour les elements 3d
-
 	var paddle1Material =
-	  new THREE.MeshLambertMaterial(
+	  new THREE.MeshBasicMaterial(
 		{
-		  color: 0x1B32C0
+                  map: texturePaddle
 		});
 	var paddle2Material =
-	  new THREE.MeshLambertMaterial(
+	  new THREE.MeshBasicMaterial(
 		{
-		  color: 0xAF40F2
+		  //color: 0xAF40F2
+                  map: textureCanon
 		});
 	var planeMaterial =
 	  new THREE.MeshLambertMaterial(
 		{
-		  color: 0xAAAAAA
+                    map: texturePlane
 		});
 	var tableMaterial =
 	  new THREE.MeshLambertMaterial(
@@ -136,13 +145,13 @@ function createScene()
 	var lifeMaterial =
 	  new THREE.MeshLambertMaterial(
 		{
-		  color: 0xFF7045
+                  map: texturePlane
 		});
 
 	var sphereMaterial =
-	  new THREE.MeshLambertMaterial(
+	  new THREE.MeshBasicMaterial(
 		{
-		  color: 0xD43001
+                  map: textureBall
 		});
 
 	//Cree les elements 3d avec les textures et les ajoute dans la scene
@@ -211,11 +220,10 @@ function createScene()
 	  paddle2Material);
 	scene.add(paddle2);
 
-
-
 	var radius = 5;
 	var	segments = 6;
 	var	rings = 6;
+
 	ball = new THREE.Mesh(
 	  new THREE.SphereGeometry(
 		radius,
@@ -235,12 +243,12 @@ function createScene()
 	paddle2.position.z = paddleDepth;
 
 	// Lumiere
-	pointLight = new THREE.PointLight(0xF8D898);
+	pointLight = new THREE.PointLight(0xFFFFFF);
 
 	pointLight.position.x = -1000;
 	pointLight.position.y = 0;
 	pointLight.position.z = 1000;
-	pointLight.intensity = 2.9;
+	pointLight.intensity = 1.0;
 	pointLight.distance = 10000;
 
 	scene.add(pointLight);
