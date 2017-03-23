@@ -88,7 +88,6 @@ class Server extends WebSocketServer {
                         $this->send($u, json_encode(array(6, $this->instance->getViewTerritorysByPlayer($p))));
                     }
                 }
-                //addVersus($id1,$id2)
                 break;
             // Mini-Game
             case 6:

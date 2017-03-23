@@ -12,9 +12,9 @@ class Instance {
     private $territorys = array();
     private $attacks = array();
     private $finish;
-    private $versus = array(array());
-    private $resultTimeGame = array();
-    private $resultGame = array();
+    //private $versus = array(array());
+    //private $resultTimeGame = array();
+    //private $resultGame = array();
 
     public function __construct() {
         $colors = array("#ffff00", "#ff0000", "#00ff00", "#0000cc");
@@ -254,6 +254,8 @@ class Instance {
         return $string;
     }
 
+    
+    /*
     // Compare two times
     // returns: 0 for equality, 1 when t1 win and 2 when t2 win
     public function compareTime($t1, $t2) {
@@ -285,7 +287,7 @@ class Instance {
                 }
             }
         }
-    }
+    }*/
 
     /*
       public function addVersus($id1,$id2){
@@ -296,6 +298,7 @@ class Instance {
       }
      */
 
+    /*
     public function addTime($player, $time) {
         $player->setTime($time);
 
@@ -309,7 +312,7 @@ class Instance {
             }
         }
 
-        /*
+    
           //$this->resultTimeGame[$id] = $time;
           $token = 0;
           foreach ($this->versus[$id] as $key => $idOpo) {
@@ -318,8 +321,10 @@ class Instance {
           $this->resultGame[$idOpo][$id] = $this->compareTime($this->resultTimeGame[$idOpo], $this->resultTimeGame[$id]);
           }
           }
-         */
+      
     }
+
+   
 
     public function checkResultGame() {
         $token = TRUE;
@@ -331,5 +336,6 @@ class Instance {
 
         return $token;
     }
+     */
 
 }

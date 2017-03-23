@@ -60,7 +60,6 @@ function init() {
                 case 6:
                     if (firstInit) {
                         data[1].forEach(function (planet) {
-                            console.log('test: #' + planet[0]);
                             var txt = makeSVG('text', {x: $('#' + planet[0]).attr('cx'), id: 'lblTrpPlnt' + planet[0],
                                 y: $('#' + planet[0]).attr('cy'), fill: 'white', 'text-anchor': 'middle',
                                 'font-family': 'sans-serif', 'font-size': '20px', 'pointer-events' : 'none'});
