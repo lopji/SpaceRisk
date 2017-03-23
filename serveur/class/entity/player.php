@@ -116,7 +116,11 @@ class Player {
         return $this->troop;
     }
     
-    public function setTroop($nbTerritory, $nbSysSolaire) {
+    public function setTroop($troop) {
+        $this->troop = $troop;
+    }
+    
+    public function assignTroop($nbTerritory, $nbSysSolaire) {
         //TODO: Prendre en compte le bonus du nombre de système solaire
         //      Prevoir de prendre en compte quel système solaire on aurait
         $this->troop = intval(self::DEFAULT_TROOPS + (0.5 * $nbTerritory) + (0.25 * self::DEFAULT_TROOPS) * $nbSysSolaire);
