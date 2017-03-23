@@ -111,6 +111,7 @@ class Server extends WebSocketServer {
                         $this->send($u, json_encode(array(4, 5)));
                     }
                     $this->instance->freeAttack();
+                    $this->instance->freeTime();
                 }
                 break;
         }

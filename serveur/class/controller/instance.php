@@ -220,6 +220,12 @@ class Instance {
         return TRUE;
     }
 
+    public function freeTime() {
+        foreach ($this->players as $player) {
+            $player->setTime(-1);
+        }
+    }
+
     public function getPlayerAttack() {
         $array = [];
         foreach ($this->attacks as $attack) {
