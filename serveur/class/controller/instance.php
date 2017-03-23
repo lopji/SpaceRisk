@@ -17,7 +17,7 @@ class Instance {
     private $resultGame = array();
 
     public function __construct() {
-        $colors = array("#ffff00", "#663300", "#339933", "#0000cc");
+        $colors = array("#ffff00", "#ff0000", "#00ff00", "#0000cc");
         $this->finish = false;
         $this->step = 0;
         $this->config = require_once('../serveur/config.php');

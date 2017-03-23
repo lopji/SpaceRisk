@@ -68,7 +68,7 @@ function init() {
                             document.getElementById('layer3').appendChild(txt);
                             tmap++;
                             if(planet[3] !== null){
-                              $('#' + planet[0]).css('stroke', planet[3]);
+                              $('#' + planet[0]).css('stroke', planet[3]).css('stroke-width', '0.5%').css('stroke-opacity', '0.6');
                             }
                         });
                         firstInit = false;
