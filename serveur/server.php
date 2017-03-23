@@ -5,7 +5,7 @@ require_once('../serveur/class/controller/instance.php');
 
 class Server extends WebSocketServer {
 
-    public $instance;
+    private $instance;
 
     public function __construct($addr, $port, $bufferLength = 2048) {
         parent::__construct($addr, $port, $bufferLength);
@@ -82,8 +82,8 @@ class Server extends WebSocketServer {
             case 5:
                 $this->stdout("Attack");
                 $player = $this->instance->getPlayerByUser($user);
-                if ($this->instance->attack($player, $data[1][0], $data[1][1], $data[1][2])) {
-                    foreach ($this->users as $u) {
+                if($this->instance->attack($player, $data[1][0], $data[1][1], $data[1][2])){
+                     foreach ($this->users as $u) {
                         $p = $this->instance->getPlayerByUser($u);
                         $this->send($u, json_encode(array(6, $this->instance->getViewTerritorysByPlayer($p))));
                     }
@@ -93,14 +93,15 @@ class Server extends WebSocketServer {
             // Mini-Game
             case 6:
                 $this->stdout("Mini Game submit Time");
-                $player = $this->instance->getPlayerByUser($user);
-                $this->instance->addTime($player, $data[1]);
+                $player = $this->instance->getPlayerByUser($user);                
+                $this->instance->addTime($player,$data[1]);
                 break;
+            
         }
     }
 
     protected function connected($user) {
-        
+
     }
 
     protected function closed($user) {

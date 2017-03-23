@@ -1,6 +1,6 @@
 <?php
 
-require_once('./class/entity/objective.php');
+require_once('../serveur/class/entity/objective.php');
 
 class Conquest extends Objective {
 
