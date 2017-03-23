@@ -29,3 +29,7 @@ body {
 #greyPicture {
     filter: grayscale(100%);
 }
+
+#plateau{
+  overflow: auto;
+}
