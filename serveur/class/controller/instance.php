@@ -17,12 +17,13 @@ class Instance {
     private $resultGame = array();
 
     public function __construct() {
+        $colors = array("#ffff00", "#663300", "#339933", "#0000cc");
         $this->finish = false;
         $this->step = 0;
         $this->config = require_once('../serveur/config.php');
         $this->territorys = require_once('../serveur/class/map/default.php');
         for ($i = 0; $i < $this->config->server_info["nbPlayer"]; $i++) {
-            array_push($this->players, new Player("Player " . $i));
+            array_push($this->players, new Player("Player " . $i, $colors[$i]));
             for($j = 0; $j < 4; $j++){
               $this->territorys[$j*10 + $i]->setPlayer($this->players[$i]);
             }
