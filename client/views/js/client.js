@@ -7,6 +7,7 @@ var actualState = 5;
 var firstInit = true;
 var tmap = 0;
 var move_first = true;
+var stroke_color;
 
 function format(type, data) {
     return [type, data];
@@ -62,10 +63,13 @@ function init() {
                             console.log('test: #' + planet[0]);
                             var txt = makeSVG('text', {x: $('#' + planet[0]).attr('cx'), id: 'lblTrpPlnt' + planet[0],
                                 y: $('#' + planet[0]).attr('cy'), fill: 'white', 'text-anchor': 'middle',
-                                'font-family': 'sans-serif', 'font-size': '20px'});
+                                'font-family': 'sans-serif', 'font-size': '20px', 'pointer-events' : 'none'});
                             txt.innerHTML = planet[2];
-                            document.getElementById('layer5').appendChild(txt);
+                            document.getElementById('layer3').appendChild(txt);
                             tmap++;
+                            if(planet[3] !== null){
+                              $('#' + planet[0]).css('stroke', planet[3]);
+                            }
                         });
                         firstInit = false;
                     } else {
@@ -96,7 +100,7 @@ function init() {
                     });
                 // Syncro data with modal scores
                 case 9:
-                    
+
                     break;
             }
         };
@@ -222,13 +226,13 @@ $('#layer3 ellipse').on({
                 }
                 break;
         }
-
-        $(this).css('filter', 'url(#dropshadow)').css('stroke', '#ffffff');
+        stroke_color = $(this).css('stroke');
+        $(this).css('stroke', '#ffffff');
 
 
     },
     mouseleave: function () {
-        $(this).css('filter', '').css('stroke', '#000000');
+        $(this).css('filter', '').css('stroke', stroke_color);
     }
 });
 //ultra try hard!!!!!!!!!!

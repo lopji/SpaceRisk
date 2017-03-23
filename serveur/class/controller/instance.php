@@ -23,7 +23,9 @@ class Instance {
         $this->territorys = require_once('../serveur/class/map/default.php');
         for ($i = 0; $i < $this->config->server_info["nbPlayer"]; $i++) {
             array_push($this->players, new Player("Player " . $i));
-            $this->territorys[$i]->setPlayer($this->players[$i]);
+            for($j = 0; $j < 4; $j++){
+              $this->territorys[$j*10 + $i]->setPlayer($this->players[$i]);
+            }
         }
         $n = rand(1, $this->config->server_info["nbPlayer"] - 1);
         for ($i = 0; $i < $this->config->server_info["nbPlayer"]; $i++) {
@@ -212,7 +214,11 @@ class Instance {
     public function getViewTerritorysByPlayer($player) {
         $array = [];
         foreach ($this->territorys as $territory) {
-            array_push($array, array($territory->getId(), $territory->checkPlayer($player), $territory->getTroop()));
+            $color = NULL;
+            if($territory->getPlayer() != null){
+              $color = $territory->getPlayer()->getColor();
+            }
+            array_push($array, array($territory->getId(), $territory->checkPlayer($player), $territory->getTroop(), $color));
         }
         return $array;
     }
