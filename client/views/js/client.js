@@ -60,7 +60,6 @@ function init() {
                 case 6:
                     if (firstInit) {
                         data[1].forEach(function (planet) {
-                            console.log('test: #' + planet[0]);
                             var txt = makeSVG('text', {x: $('#' + planet[0]).attr('cx'), id: 'lblTrpPlnt' + planet[0],
                                 y: $('#' + planet[0]).attr('cy'), fill: 'white', 'text-anchor': 'middle',
                                 'font-family': 'sans-serif', 'font-size': '20px', 'pointer-events' : 'none'});
@@ -136,6 +135,7 @@ function phase(id) {
         case 2:
             $('#phase').html("Attack");
             grayFilterPhase(id);
+            move_first = true;
             break;
         case 3:
             $('#phase').html("Game");
@@ -183,35 +183,41 @@ function grayFilterPhase(idPhase) {
 
 var self;
 $('#layer3 ellipse').on({
+    click: function(){
+      self = $(this);
+    },
     mouseenter: function () {
-        $(this).popover('destroy');
-        self = $(this);
         switch (actualState) {
             //Déploiement de troupes
             case 0:
-                var content = '<div class="select"><select id="sel-deploy" class="form-control">';
+              $(this).popover('destroy');
+              //contenu du popover
+              var content = '<div class="select"><select id="sel-deploy" class="form-control">';
                 for (var i = 1; i <= troops; i++) {
                     content += '<option value="' + i + '">' + i + '</option>';
                 }
                 content += "</select><button type='button' id='btnSend' class='btn btn-primary' onClick='send(format(2, [self.attr(\"id\"),"+
-                         "$(\"#sel-deploy\").val()]));'>Déployer troupes</button></div>";
+                         "$(\"#sel-deploy\").val()])); self.popover(\"destroy\");'>Déployer troupes</button></div>";
                 $(this).popover({container: 'body', html: true, content: content, title: 'Deploy',
                     template: '<div class="popover" role="tooltip"><div class="arrow"></div>' +
                             '<h3 class="popover-title"></h3><div class="popover-content"></div></div>'});
 
+
                 break;
             //Déplacement
             case 1:
+                $(this).popover('destroy');
                 if(move_first){
-                  var content = '<div class="select"><select id="sel-move_from" class="form-control">';
+                  var content = '<div class="select"><select id="sel-move-from" class="form-control">';
                   tr = $('#lblTrpPlnt' + self.attr('id')).html();
                   for (var i = 1; i <= tr; i++) {
                       content += '<option value="' + i + '">' + i + '</option>';
                   }
                   content += "</select><button type='button' id='btnSendMoveFrom' class='btn btn-primary'"+
-                                  "onClick='troops = $(\"#sel-move_from\").val();"+
-                                  "move_from = " + self.attr('id') + "; move_first = false;'>Sélectionner troupes</button></div>";
-                  $(this).popover({container: 'body', html: true, content: content, title: 'Select',
+//dg-movement-end
+                                  "onClick='move_from = " + self.attr('id') +
+                                  " ; move_first = false; seltroops = $(\"#sel-move-from\").val(); ;self.popover(\"destroy\");'>Confirmer</button></div>";
+                  $(this).popover({container: 'body', html: true, content: content, title: 'Combien de troupes voulez vous déplacer?',
                       template: '<div class="popover" role="tooltip"><div class="arrow"></div>' +
                               '<h3 class="popover-title"></h3><div class="popover-content"></div></div>'});
 
@@ -219,13 +225,53 @@ $('#layer3 ellipse').on({
                 //Déplacement : Sélection de la 2ème planète
                 else{
                   if (parseInt(self.attr('id')) !== move_from) {
-                      var content = "<button type='button' id='btnSend' class='btn btn-primary' onClick='send(format(4, [move_from, self.attr('id'), troops])); move_first = true;'>Déployer troupes</button></div>";
+
+                      var content = "<button type='button' id='btnSend' class='btn btn-primary' onClick='send(format(4, [move_from, self.attr(\"id\"), seltroops])); move_first = true; seltroops = 0; self.popover(\"destroy\");'>Confirmer</button></div>";
+                      $(this).popover({container: 'body', html: true, content: content, title: 'Voulez-vous déplacer '+seltroops+'?',
+
+                     /* var content = "<button type='button' id='btnSend' class='btn btn-primary' onClick='send(format(4, [move_from, " + self.attr('id') + " , seltroops]));\n\
+                      $(\"#lblTrpPlnt"+self.attr('id')+"\").html(\"\").html(\"" + (parseInt(tr) + parseInt(troops))+"\");\n\
+                      $(\"#lblTrpPlnt"+move_from+"\").html(\"" + (parseInt($('#lblTrpPlnt' + move_from).html()) - parseInt(troops))+"\");\n\
+                      move_first = true;'>Déplacer</button></div>";
+                      $(this).popover({container: 'body', html: true, content: content, title: troops + ' troupes',*/
+
+                          template: '<div class="popover" role="tooltip"><div class="arrow"></div>' +
+                                  '<h3 class="popover-title"></h3><div class="popover-content"></div></div>'});
+                  }
+                }
+                break;
+            //Attaque
+            case 2:
+                $(this).popover('destroy');
+                if(move_first){
+                  var content = '<div class="select"><select id="sel-attack_from" class="form-control">';
+                  tr = $('#lblTrpPlnt' + self.attr('id')).html();
+                  for (var i = 1; i <= tr; i++) {
+                      content += '<option value="' + i + '">' + i + '</option>';
+                  }
+                  content += "</select><button type='button' id='btnSendAttackFrom' class='btn btn-primary'"+
+                                  "onClick='troops = $(\"#sel-attack_from\").val();"+
+                                  "attack_from = " + self.attr('id') + "; move_first = false; self.popover(\"destroy\");'>Sélectionner troupes</button></div>";
+                  $(this).popover({container: 'body', html: true, content: content, title: 'Select for attack',
+                      template: '<div class="popover" role="tooltip"><div class="arrow"></div>' +
+                              '<h3 class="popover-title"></h3><div class="popover-content"></div></div>'});
+
+                }
+                //Déplacement : Sélection de la 2ème planète
+                else{
+                  if (parseInt(self.attr('id')) !== attack_from) {
+                      var content = "<button type='button' id='btnSend' class='btn btn-primary' onClick='send(format(5, [attack_from, self.attr(\"id\"),troops])); move_first = true; self.popover(\"destroy\");'>Attaquer</button></div>";
                       $(this).popover({container: 'body', html: true, content: content, title: troops + ' troupes',
                           template: '<div class="popover" role="tooltip"><div class="arrow"></div>' +
                                   '<h3 class="popover-title"></h3><div class="popover-content"></div></div>'});
                   }
                 }
                 break;
+
+            //Attends
+             case 3:
+                $(this).popover('destroy');
+            break;
         }
         stroke_color = $(this).css('stroke');
         $(this).css('stroke', '#ffffff');
