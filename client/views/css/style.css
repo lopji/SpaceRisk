@@ -1,6 +1,12 @@
 body {
     padding-top: 10px;
     font-size:15px;
+    background-color: black;
+    color: white;
+}
+
+.popover {
+    color: black;
 }
 
 .starter-template {

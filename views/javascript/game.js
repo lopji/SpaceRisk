@@ -111,17 +111,23 @@ function createScene()
 	var	planeHeight = fieldHeight;
 	var	planeQuality = 10;
 
-	// Create les textures pour les elements 3d
+        // Texture importées
+        var textureBall = new THREE.TextureLoader().load("views/ressources/s_terre.png");
+        var texturePaddle = new THREE.TextureLoader().load("views/ressources/p_neptune.jpg");
+        var textureCanon = new THREE.TextureLoader().load("views/ressources/p_venus.jpg");
 
+	// Create les textures pour les elements 3d       
 	var paddle1Material =
 	  new THREE.MeshLambertMaterial(
 		{
-		  color: 0x1B32C0
+		  //color: 0x1B32C0
+                  map: texturePaddle
 		});
 	var paddle2Material =
 	  new THREE.MeshLambertMaterial(
 		{
-		  color: 0xAF40F2
+		  //color: 0xAF40F2
+                  map: textureCanon
 		});
 	var planeMaterial =
 	  new THREE.MeshLambertMaterial(
@@ -142,7 +148,8 @@ function createScene()
 	var sphereMaterial =
 	  new THREE.MeshLambertMaterial(
 		{
-		  color: 0xD43001
+		  //color: 0xD43001                 
+                  map: textureBall
 		});
 
 	//Cree les elements 3d avec les textures et les ajoute dans la scene
