@@ -1,8 +1,8 @@
 body {
     padding-top: 10px;
     font-size:15px;
-    background-color: black;
-    color: white;
+    /*background-color: black;
+    color: white;*/
 }
 
 .popover {
@@ -28,4 +28,8 @@ body {
 
 #greyPicture {
     filter: grayscale(100%);
+}
+
+#plateau{
+  overflow: auto;
 }
