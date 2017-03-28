@@ -72,6 +72,7 @@ class Server extends WebSocketServer {
                 $this->stdout("Movement");
                 $player = $this->instance->getPlayerByUser($user);
                 if ($this->instance->movement($player, $data[1][0], $data[1][1], $data[1][2])) {
+                    echo 'pisse de chat';
                     foreach ($this->users as $u) {
                         $p = $this->instance->getPlayerByUser($u);
                         $this->send($u, json_encode(array(6, $this->instance->getViewTerritorysByPlayer($p))));

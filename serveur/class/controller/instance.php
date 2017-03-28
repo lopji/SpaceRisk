@@ -25,7 +25,7 @@ class Instance {
         for ($i = 0; $i < $this->config->server_info["nbPlayer"]; $i++) {
             array_push($this->players, new Player("Player " . $i, $colors[$i]));
             for($j = 0; $j < 4; $j++){
-              $this->territorys[$j*10 + $i]->setPlayer($this->players[$i]);
+              $this->territorys[$i*10 + $j]->setPlayer($this->players[$i]);
             }
         }
         $n = rand(1, $this->config->server_info["nbPlayer"] - 1);
@@ -254,7 +254,7 @@ class Instance {
         return $string;
     }
 
-    
+
     /*
     // Compare two times
     // returns: 0 for equality, 1 when t1 win and 2 when t2 win
@@ -312,7 +312,7 @@ class Instance {
             }
         }
 
-    
+
           //$this->resultTimeGame[$id] = $time;
           $token = 0;
           foreach ($this->versus[$id] as $key => $idOpo) {
@@ -321,10 +321,10 @@ class Instance {
           $this->resultGame[$idOpo][$id] = $this->compareTime($this->resultTimeGame[$idOpo], $this->resultTimeGame[$id]);
           }
           }
-      
+
     }
 
-   
+
 
     public function checkResultGame() {
         $token = TRUE;

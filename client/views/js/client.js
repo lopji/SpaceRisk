@@ -97,6 +97,7 @@ function init() {
                     data[1].forEach(function (ps) {
                         $('#objectifs').append('<li>' + ps + '</li>');
                     });
+                    break;
                 // Syncro data with modal scores
                 case 9:
 
@@ -139,7 +140,7 @@ function phase(id) {
             break;
         case 3:
             $('#phase').html("Game");
-            $('#game-modal').modal({backdrop: 'static', keyboard: false})
+            $('#game-modal').modal({backdrop: 'static', keyboard: false});
             $('#game-modal').modal('show');
             break;
         case 4:
@@ -190,7 +191,7 @@ $('#layer3 ellipse').on({
         switch (actualState) {
             //Déploiement de troupes
             case 0:
-              $(this).popover('destroy');
+              //$(this).popover('destroy');
               //contenu du popover
               var content = '<div class="select"><select id="sel-deploy" class="form-control">';
                 for (var i = 1; i <= troops; i++) {
@@ -206,10 +207,10 @@ $('#layer3 ellipse').on({
                 break;
             //Déplacement
             case 1:
-                $(this).popover('destroy');
+                //$(this).popover('destroy');
                 if(move_first){
                   var content = '<div class="select"><select id="sel-move-from" class="form-control">';
-                  tr = $('#lblTrpPlnt' + self.attr('id')).html();
+                  tr = $('#lblTrpPlnt' + $(this).attr('id')).text();
                   for (var i = 1; i <= tr; i++) {
                       content += '<option value="' + i + '">' + i + '</option>';
                   }
@@ -228,13 +229,6 @@ $('#layer3 ellipse').on({
 
                       var content = "<button type='button' id='btnSend' class='btn btn-primary' onClick='send(format(4, [move_from, self.attr(\"id\"), seltroops])); move_first = true; seltroops = 0; self.popover(\"destroy\");'>Confirmer</button></div>";
                       $(this).popover({container: 'body', html: true, content: content, title: 'Voulez-vous déplacer '+seltroops+'?',
-
-                     /* var content = "<button type='button' id='btnSend' class='btn btn-primary' onClick='send(format(4, [move_from, " + self.attr('id') + " , seltroops]));\n\
-                      $(\"#lblTrpPlnt"+self.attr('id')+"\").html(\"\").html(\"" + (parseInt(tr) + parseInt(troops))+"\");\n\
-                      $(\"#lblTrpPlnt"+move_from+"\").html(\"" + (parseInt($('#lblTrpPlnt' + move_from).html()) - parseInt(troops))+"\");\n\
-                      move_first = true;'>Déplacer</button></div>";
-                      $(this).popover({container: 'body', html: true, content: content, title: troops + ' troupes',*/
-
                           template: '<div class="popover" role="tooltip"><div class="arrow"></div>' +
                                   '<h3 class="popover-title"></h3><div class="popover-content"></div></div>'});
                   }
@@ -242,10 +236,10 @@ $('#layer3 ellipse').on({
                 break;
             //Attaque
             case 2:
-                $(this).popover('destroy');
+                //$(this).popover('destroy');
                 if(move_first){
                   var content = '<div class="select"><select id="sel-attack_from" class="form-control">';
-                  tr = $('#lblTrpPlnt' + self.attr('id')).html();
+                  tr = $('#lblTrpPlnt' + self.attr('id')).text();
                   for (var i = 1; i <= tr; i++) {
                       content += '<option value="' + i + '">' + i + '</option>';
                   }
@@ -287,7 +281,7 @@ $("body").click(function(e){
   $('#layer3 ellipse').each(function () {
         // hide any open popovers when the anywhere else in the body is clicked
         if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-            $(this).popover('hide');
+            $(this).popover('destroy');
         }
     });
 });
