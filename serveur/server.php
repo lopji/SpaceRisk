@@ -34,13 +34,7 @@ class Server extends WebSocketServer {
                 $this->stdout("Client next state");
                 $player = $this->instance->getPlayerByUser($user);
                 if ($this->instance->state($player)) {
-                    if ($player->getState() == 3) {
-                        foreach ($this->instance->getPlayerAttack() as $p) {
-                            $this->send($p->getUser(), json_encode(array(4, $player->getState())));
-                        }
-                    } else {
-                        $this->send($user, json_encode(array(4, $player->getState())));
-                    }
+                    $this->send($user, json_encode(array(4, $player->getState())));
                     if ($player->getState() == 5) {
                         $this->send($this->instance->getPlayer()->getUser(), json_encode(array(4, $this->instance->getPlayer()->getState())));
                         if ($this->instance->checkRound()) {
@@ -78,7 +72,6 @@ class Server extends WebSocketServer {
                 $this->stdout("Movement");
                 $player = $this->instance->getPlayerByUser($user);
                 if ($this->instance->movement($player, $data[1][0], $data[1][1], $data[1][2])) {
-                    echo 'pisse de chat';
                     foreach ($this->users as $u) {
                         $p = $this->instance->getPlayerByUser($u);
                         $this->send($u, json_encode(array(6, $this->instance->getViewTerritorysByPlayer($p))));
@@ -89,37 +82,26 @@ class Server extends WebSocketServer {
             case 5:
                 $this->stdout("Attack");
                 $player = $this->instance->getPlayerByUser($user);
-                if ($this->instance->attack($player, $data[1][0], $data[1][1], $data[1][2])) {
-                    foreach ($this->users as $u) {
+                if($this->instance->attack($player, $data[1][0], $data[1][1], $data[1][2])){
+                     foreach ($this->users as $u) {
                         $p = $this->instance->getPlayerByUser($u);
                         $this->send($u, json_encode(array(6, $this->instance->getViewTerritorysByPlayer($p))));
                     }
                 }
+                //addVersus($id1,$id2)
                 break;
             // Mini-Game
             case 6:
                 $this->stdout("Mini Game submit Time");
                 $player = $this->instance->getPlayerByUser($user);
-                if ($this->instance->time($player, $data[1])) {
-                    $this->instance->state($this->instance->getPlayer());
-                    $this->instance->resolution();
-                    $score = $this->instance->getScore();
-                    foreach ($this->users as $u) {
-                        $this->send($u, json_encode(array(4, $this->instance->getPlayer()->getState())));
-                        $this->send($u, json_encode(array(9, $score)));
-                        $p = $this->instance->getPlayerByUser($u);
-                        $this->send($u, json_encode(array(6, $this->instance->getViewTerritorysByPlayer($p))));
-                        $this->send($u, json_encode(array(4, 5)));
-                    }
-                    $this->instance->freeAttack();
-                    $this->instance->freeTime();
-                }
+                $this->instance->addTime($player,$data[1]);
                 break;
+
         }
     }
 
     protected function connected($user) {
-        
+
     }
 
     protected function closed($user) {
