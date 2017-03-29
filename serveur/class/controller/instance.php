@@ -1,4 +1,5 @@
 <?php
+
 require_once('../serveur/class/entity/player.php');
 require_once('../serveur/class/entity/objectives/defeat.php');
 require_once('../serveur/class/entity/objectives/number.php');
@@ -12,6 +13,7 @@ class Instance {
     private $territorys = array();
     private $attacks = array();
     private $finish;
+
     //private $versus = array(array());
     //private $resultTimeGame = array();
     //private $resultGame = array();
@@ -81,7 +83,7 @@ class Instance {
     }
 
     public function resolution() {
-        foreach ($this->attacks as $attack) {
+        foreach ($this->attacks as &$attack) {
             $id1 = $attack[0];
             $id2 = $attack[1];
             $troop1 = $attack[2];
@@ -89,22 +91,27 @@ class Instance {
 
             if (!$this->territorys[$id2]->checkPlayer($player)) {
                 $troop2 = $this->territorys[$id2]->getTroop();
-                $this->territorys[$id1]->removeTroop($troop1);
 
                 // TODO: Comparer les temps et attribuer le bonus en conséquence
 
                 if ($troop1 == $troop2) {
                     $this->territorys[$id2]->setTroop(1);
+                    $attack[3] = $id2;
                 } else if ($troop1 > $troop2) {
                     $this->territorys[$id2]->setTroop($troop1 - $troop2);
                     $this->territorys[$id2]->setPlayer($player);
+                    $attack[3] = $id1;
                 } else if ($troop1 < $troop2) {
                     $this->territorys[$id2]->setTroop($troop2 - $troop1);
+                    $attack[3] = $id2;
                 }
             } else {
                 $this->movement($player, $id1, $id2, $troop1);
             }
         }
+    }
+
+    public function freeAttack() {
         $this->attacks = [];
     }
 
@@ -153,7 +160,7 @@ class Instance {
             foreach ($this->players as $p) {
                 $nbTerritory = count($this->getTerritorysByPlayer($p));
                 $nbSysSolaire = 0;
-                $p->setTroop($nbTerritory, $nbSysSolaire);
+                $p->assignTroop($nbTerritory, $nbSysSolaire);
                 // TODO: Calculer le nombre de système solaire
             }
         }
@@ -203,6 +210,39 @@ class Instance {
         }
     }
 
+    public function time($player, $time) {
+        $player->setTime($time);
+        foreach ($this->getPlayerAttack() as $p) {
+            if ($p->getTime() == -1) {
+                return FALSE;
+            }
+        }
+        return TRUE;
+    }
+
+    public function freeTime() {
+        foreach ($this->players as $player) {
+            $player->setTime(-1);
+        }
+    }
+
+    public function getPlayerAttack() {
+        $array = [];
+        foreach ($this->attacks as $attack) {
+            if (!isset($array[$attack[0]])) {
+                if ($this->territorys[$attack[0]]->getPlayer() != NULL) {
+                    $array[$attack[0]] = $this->territorys[$attack[0]]->getPlayer();
+                }
+            }
+            if (!isset($array[$attack[1]])) {
+                if ($this->territorys[$attack[1]]->getPlayer() != NULL) {
+                    $array[$attack[1]] = $this->territorys[$attack[1]]->getPlayer();
+                }
+            }
+        }
+        return $array;
+    }
+
     public function getPlayerByUser($user) {
         foreach ($this->players as $player) {
             if ($player->checkUser($user)) {
@@ -212,12 +252,22 @@ class Instance {
         return NULL;
     }
 
+    public function getScore() {
+        $array = [];
+        $i = 0;
+        foreach ($this->attacks as $attack) {
+            $i++;
+            array_push($array, [$i, $this->territorys[$attack[3]]->getPlayer()->getPseudo()]);
+        }
+        return $array;
+    }
+
     public function getViewTerritorysByPlayer($player) {
         $array = [];
         foreach ($this->territorys as $territory) {
             $color = NULL;
-            if($territory->getPlayer() != null){
-              $color = $territory->getPlayer()->getColor();
+            if ($territory->getPlayer() != null) {
+                $color = $territory->getPlayer()->getColor();
             }
             array_push($array, array($territory->getId(), $territory->checkPlayer($player), $territory->getTroop(), $color));
         }

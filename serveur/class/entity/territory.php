@@ -31,11 +31,15 @@ class Territory {
     }
 
     public function removeTroop($troop) {
-        if ($this->troop - $troop > 1) {
+        if ($this->troop - $troop > 0) {
             $this->troop -= $troop;
             return TRUE;
         }
         return FALSE;
+    }
+    
+    public function setTroop($troop){
+        $this->troop = $troop;
     }
 
     public function checkPlayer($player) {
