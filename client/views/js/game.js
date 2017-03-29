@@ -113,7 +113,7 @@ function createScene()
 	var planeWidth = fieldWidth;
 	var planeHeight = fieldHeight;
 	var planeQuality = 10;
-
+        
         //Texture importées
         var textureBall = new THREE.TextureLoader().load("./views/ressources/s_terre.png");
         var texturePaddle = new THREE.TextureLoader().load("./views/ressources/p_neptune.jpg");
@@ -231,7 +231,7 @@ function createScene()
 		rings),
 	  sphereMaterial);
 	scene.add(ball);
-
+        
 	// Place la balle
 	resetBall();
 	ball.position.z = radius;
