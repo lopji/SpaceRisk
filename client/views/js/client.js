@@ -275,7 +275,7 @@ $('#layer3 ellipse').on({
       }
       //Déplacement : Sélection de la 2ème planète
       else {
-        if (adjacences[move_from].indexOf(parseInt($(this).attr('id'))) > -1 && $(this).css('stroke') === $('#'+move_from).css('stroke')) {
+        if (adjacences[move_from].indexOf(parseInt($(this).attr('id'))) > -1) {
 
           var content = "<button type='button' id='btnSend' class='btn btn-primary' onClick='send(format(4, [move_from, self.attr(\"id\"), seltroops])); move_first = true; seltroops = 0; self.popover(\"destroy\");'>Confirmer</button><button type='button' class='btn btn-primary' onClick='seltroops = 0; move_first = true; self.popover(\"destroy\");'>Annuler</button>";
           $(this).popover({container: 'body', trigger: 'manual', html: true, content: content, title: 'Voulez-vous déplacer ' + seltroops + '?',
