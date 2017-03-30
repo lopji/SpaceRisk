@@ -86,7 +86,23 @@ function init() {
         //List player
         case 3:
         data[1].forEach(function (ps) {
-          $('#joueurs').append('<span style="color:' + ps[0] + ';">' + ps[1] + ' </span>');
+          switch(ps[0]){
+            case "#ffff00":
+              $('#joueurs').append('<p class="bg-warning col-sm-3">' + ps[1] + ' </p>');
+              break;
+            case "#ff0000":
+              $('#joueurs').append('<p class="bg-danger col-sm-3">' + ps[1] + ' </p>');
+              break;
+            case "#00ff00":
+              $('#joueurs').append('<p class="bg-success col-sm-3">' + ps[1] + ' </p>');
+              break;
+            case "#0000cc":
+              $('#joueurs').append('<p class="bg-info col-sm-3">' + ps[1] + ' </p>');
+              break;
+            default:
+              $('#joueurs').append('<p class="col-sm-3">' + ps[1] + ' </p>');
+              break;
+          }
         });
         break;
         //State
@@ -135,7 +151,23 @@ function init() {
         if ($("#chat > li").length === 5) {
           $('#chat').find('li').first().remove();
         }
-        $('#chat').append('<li style="color:' + data[1][0] + ';">' + data[1][1] + '</li>');
+        switch(data[1][0]){
+          case "#ffff00":
+            $('#chat').append('<li class="bg-warning">' + data[1][1] + '</li>');
+            break;
+          case "#ff0000":
+            $('#chat').append('<li class="bg-danger">' + data[1][1] + '</li>');
+            break;
+          case "#00ff00":
+            $('#chat').append('<li class="bg-success">' + data[1][1] + '</li>');
+            break;
+          case "#0000cc":
+            $('#chat').append('<li class="bg-info">' + data[1][1] + '</li>');
+            break;
+          default:
+            $('#chat').append('<li class="col-sm-3">' + data[1][1] + '</li>');
+            break;
+        }
         break;
         // Objectifs
         case 8:
