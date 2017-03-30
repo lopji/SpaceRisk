@@ -26,8 +26,8 @@ class Instance {
         $this->territorys = require_once('../serveur/class/map/default.php');
         for ($i = 0; $i < $this->config->server_info["nbPlayer"]; $i++) {
             array_push($this->players, new Player("Player " . $i, $colors[$i]));
-            for($j = 0; $j < 4; $j++){
-              $this->territorys[$i*10 + $j]->setPlayer($this->players[$i]);
+            for ($j = 0; $j < 4; $j++) {
+                $this->territorys[$i * 10 + $j]->setPlayer($this->players[$i]);
             }
         }
         $n = rand(1, $this->config->server_info["nbPlayer"] - 1);
@@ -277,7 +277,7 @@ class Instance {
     public function getTerritorysByPlayer($player) {
         $array = [];
         foreach ($this->territorys as $territory) {
-            if ($player->checkPlayer($territory->getPlayer())) {
+            if ($territory->checkPlayer($player)) {
                 array_push($array, $territory);
             }
         }
@@ -303,89 +303,5 @@ class Instance {
         }
         return $string;
     }
-
-
-    /*
-    // Compare two times
-    // returns: 0 for equality, 1 when t1 win and 2 when t2 win
-    public function compareTime($t1, $t2) {
-        list($h1, $m1, $s1, $ms1) = explode(":", $t1);
-        list($h2, $m2, $s2, $ms2) = explode(":", $t2);
-
-        if ($h1 > $h2) {
-            return 1;
-        } elseif ($h2 > $h1) {
-            return 2;
-        } else {
-            if ($m1 > $m2) {
-                return 1;
-            } elseif ($m2 > $m1) {
-                return 2;
-            } else {
-                if ($s1 > $s2) {
-                    return 1;
-                } elseif ($s2 > $s1) {
-                    return 2;
-                } else {
-                    if ($ms1 > $ms2) {
-                        return 1;
-                    } elseif ($ms2 > $ms1) {
-                        return 2;
-                    } else {
-                        return 0;
-                    }
-                }
-            }
-        }
-    }*/
-
-    /*
-      public function addVersus($id1,$id2){
-      array_push($this->versus[$id1],$id2);
-      $this->resultTimeGame[$id1] = -1;
-      $this->resultTimeGame[$id2] = -1;
-      $this->resultGame[$id1][$id2]= -1;
-      }
-     */
-
-    /*
-    public function addTime($player, $time) {
-        $player->setTime($time);
-
-        foreach ($this->attacks as $att) {
-            if ($this->territorys[$att[0]]->checkPlayer($player)) {
-                if ($this->territorys[$att[1]]->getPlayer()->getTime() != -1) {
-                    // Attribute directly the result of comparison to our array
-                    $att[3] = $this->compareTime($player->getTime(), $this->territorys[$att[1]]->getPlayer()->getTime());
-                    // $att[3] contains 0 when equality, 1 when left side win, 2 when right side win
-                }
-            }
-        }
-
-
-          //$this->resultTimeGame[$id] = $time;
-          $token = 0;
-          foreach ($this->versus[$id] as $key => $idOpo) {
-          if ($this->resultTimeGame[$idOpo] != -1) {
-          $this->resultGame[$id][$idOpo] = $this->compareTime($this->resultTimeGame[$id], $this->resultTimeGame[$idOpo]);
-          $this->resultGame[$idOpo][$id] = $this->compareTime($this->resultTimeGame[$idOpo], $this->resultTimeGame[$id]);
-          }
-          }
-
-    }
-
-
-
-    public function checkResultGame() {
-        $token = TRUE;
-        foreach ($this->attacks as $att) {
-            if ($att[3] == -1) {
-                $token = FALSE;
-            }
-        }
-
-        return $token;
-    }
-     */
 
 }
