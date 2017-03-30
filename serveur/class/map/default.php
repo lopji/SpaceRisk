@@ -27,7 +27,7 @@ return array(
     new Territory(21, array(20, 22, 23)),
     new Territory(22, array(17, 21)),
     new Territory(23, array(21, 24, 28)),
-    new Territory(24, array(23, 26, 30)),
+    new Territory(24, array(25, 23, 26, 30)),
     new Territory(25, array(24, 27, 28)),
     new Territory(26, array(24)),
     new Territory(27, array(0, 25, 28)),
