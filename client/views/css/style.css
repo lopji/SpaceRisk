@@ -38,3 +38,15 @@ body {
     line-height: 60px;
 
 }
+
+.glow-animation {
+    animation-name: planetglow;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes planetglow {
+    0%   {stroke: black;}
+    100% {stroke: red;}
+}
