@@ -15,7 +15,7 @@ class Player {
     private $objectives = [];
     private $time;
 
-    public function __construct($pseudo) {
+    public function __construct($pseudo, $color) {
         $this->id = -1;
         $this->user = null;
         $this->connected = FALSE;
@@ -23,7 +23,7 @@ class Player {
         $this->state = 5;
         $this->troop = self::DEFAULT_TROOPS;
         $this->pseudo = $pseudo;
-        $this->color = '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT);
+        $this->color = $color;
         $this->time = -1;
     }
 
@@ -116,7 +116,11 @@ class Player {
         return $this->troop;
     }
     
-    public function setTroop($nbTerritory, $nbSysSolaire) {
+    public function setTroop($troop) {
+        $this->troop = $troop;
+    }
+    
+    public function assignTroop($nbTerritory, $nbSysSolaire) {
         //TODO: Prendre en compte le bonus du nombre de système solaire
         //      Prevoir de prendre en compte quel système solaire on aurait
         $this->troop = intval(self::DEFAULT_TROOPS + (0.5 * $nbTerritory) + (0.25 * self::DEFAULT_TROOPS) * $nbSysSolaire);

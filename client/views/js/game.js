@@ -65,6 +65,9 @@ function chronoStop(){
 // Point d'entree du Script
 function setup()
 {
+	 difficulty = 0.5;
+	 maxLife = 2;
+
 	document.getElementById("game_btn").style.display='none';
 	document.getElementById("winnerBoard").innerHTML = "Survivre";
 	document.getElementById("scores").innerHTML = "Vie(s) : " + maxLife;
@@ -220,7 +223,7 @@ function createScene()
 	var radius = 5;
 	var	segments = 6;
 	var	rings = 6;
-                
+
 	ball = new THREE.Mesh(
 	  new THREE.SphereGeometry(
 		radius,

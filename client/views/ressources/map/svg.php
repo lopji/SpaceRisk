@@ -1866,23 +1866,6 @@
     </rdf:RDF>
   </metadata>
 
-  <!-- ================== A COPIER SUR FUTURES MAP =============== -->
-  <filter id="dropshadow" height="150%">
-      <feComponentTransfer in="SourceAlpha">
-          <feFuncR type="discrete" tableValues="1"/>
-          <feFuncG type="discrete" tableValues="1"/>
-          <feFuncB type="discrete" tableValues="1"/>
-      </feComponentTransfer>
-      <feGaussianBlur stdDeviation="2"/> <!-- stdDeviation is how much to blur -->
-      <feOffset dx="0" dy="0" result="offsetblur"/> <!-- how much to offset -->
-      <!--<feFlood flood-color="#ffffff" flood-opacity="0.5" result="offsetColor"/>-->
-      <feMerge>
-          <feMergeNode/> <!-- this contains the offset blurred image -->
-          <feMergeNode in="SourceGraphic"/> <!-- this contains the element that the filter is applied to -->
-      </feMerge>
-  </filter>
-  <!-- ================== A COPIER SUR FUTURES MAP =============== -->
-
   <g
      inkscape:label="background"
      inkscape:groupmode="layer"
