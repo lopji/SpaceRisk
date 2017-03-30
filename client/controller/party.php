@@ -33,8 +33,6 @@ class party extends prefab {
         $this->data["players"] = $room->getPlayers();
 
         if ($room->checkReady()) {
-            $cmd = "php ./../serveur/server.php";
-            pclose(popen("start " . $cmd, "r"));
             header('Location: index.php?pages=game&id=' . $id);
             exit();
         }
