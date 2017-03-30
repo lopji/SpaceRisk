@@ -51,5 +51,5 @@ body {
 
 @keyframes planetglow {
     0%   {stroke: black;}
-    100% {stroke: red;}
+    100% {stroke: white;}
 }
