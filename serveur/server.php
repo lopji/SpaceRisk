@@ -50,6 +50,12 @@ class Server extends WebSocketServer {
                             }
                         }
                     }
+                    if ($this->instance->finish) {
+                        foreach ($this->users as $u) {
+                            $this->send($u, json_encode(array(10, "Lopji")));
+                        }
+                        exit();
+                    }
                 }
                 break;
             //Deployment

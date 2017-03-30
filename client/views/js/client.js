@@ -122,7 +122,6 @@ function init() {
             $('#lblTrpPlnt' + planet[0]).html(planet[2]);
           });
         }
-
         if (checkTitle()) {
           data[1].forEach(function (ps) {
             if (ps[1] === true) {
@@ -151,6 +150,13 @@ function init() {
           $('#score-modal-body').append("<p>Attaque numéro " + ps[0] + ": Le joueur " + ps[1] + " à gagné !</p>");
         });
         break;
+        case 10:
+          console.log("Victory");
+          setTimeout(
+          function () {
+            $(location).attr('href', 'http://127.0.0.1/SpaceRisk/client/');
+          }, 1000 * 10);
+          break;
       }
     };
     socket.onclose = function (msg) {

@@ -12,7 +12,7 @@ class Instance {
     private $players = array();
     private $territorys = array();
     private $attacks = array();
-    private $finish;
+    public $finish = FALSE;
 
     //private $versus = array(array());
     //private $resultTimeGame = array();
@@ -20,7 +20,6 @@ class Instance {
 
     public function __construct() {
         $colors = array("#ffff00", "#ff0000", "#00ff00", "#0000cc");
-        $this->finish = false;
         $this->step = 0;
         $this->config = require_once('../serveur/config.php');
         $this->territorys = require_once('../serveur/class/map/default.php');
@@ -166,8 +165,24 @@ class Instance {
         }
 
         if (!$this->finish) {
-            $idPlayer = $this->step % $this->config->server_info["nbPlayer"];
-            $this->player = $this->players[$idPlayer];
+            $idPlayer = -1;
+            $nbTerritory = -1;
+            $init = FALSE;
+
+            do {
+                if ($init) {
+                    $this->step++;
+                } else {
+                    $init = TRUE;
+                }
+                $idPlayer = $this->step % $this->config->server_info["nbPlayer"];
+                $this->player = $this->players[$idPlayer];
+                $nbTerritory = count($this->getTerritorysByPlayer($this->players[$idPlayer]));
+                if ($nbTerritory == 0) {
+                    $this->player->lose();
+                }
+            } while ($this->player->isLose());
+
             $this->player->setState(0);
         }
     }
@@ -257,7 +272,11 @@ class Instance {
         $i = 0;
         foreach ($this->attacks as $attack) {
             $i++;
-            array_push($array, [$i, $this->territorys[$attack[3]]->getPlayer()->getPseudo()]);
+            if (!is_null($this->territorys[$attack[3]]->getPlayer())) {
+                array_push($array, [$i, $this->territorys[$attack[3]]->getPlayer()->getPseudo()]);
+            } else {
+                array_push($array, [$i, "Bot"]);
+            }
         }
         return $array;
     }
