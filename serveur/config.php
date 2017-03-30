@@ -13,4 +13,3 @@ return (object) array(
                 'nbPlayer' => 4
             )
 );
-
