@@ -132,8 +132,8 @@ function init() {
         break;
         // Chat
         case 7:
-        if ($("#chat > div").length === 5) {
-          $('#chat').find('div').first().remove();
+        if ($("#chat > li").length === 5) {
+          $('#chat').find('li').first().remove();
         }
         $('#chat').append('<li style="color:' + data[1][0] + ';">' + data[1][1] + '</li>');
         break;
