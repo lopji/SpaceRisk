@@ -269,7 +269,7 @@ $('#layer3 ellipse').on({
       }
       //Déplacement : Sélection de la 2ème planète
       else {
-        if (adjacences[move_from].indexOf(parseInt($(this).attr('id'))) > -1) {
+        if (adjacences[move_from].indexOf(parseInt($(this).attr('id'))) > -1 && $(this).css('stroke') === $('#'+move_from).css('stroke')) {
 
           var content = "<button type='button' id='btnSend' class='btn btn-primary' onClick='send(format(4, [move_from, self.attr(\"id\"), seltroops])); move_first = true; seltroops = 0; self.popover(\"destroy\");'>Confirmer</button><button type='button' class='btn btn-primary' onClick='seltroops = 0; move_first = true; self.popover(\"destroy\");'>Annuler</button>";
           $(this).popover({container: 'body', trigger: 'manual', html: true, content: content, title: 'Voulez-vous déplacer ' + seltroops + '?',
@@ -317,9 +317,18 @@ $('#layer3 ellipse').on({
   mouseenter: function () {
     stroke_color = $(this).css('stroke');
     $(this).css('stroke', '#ffffff');
+
+    //planète adjacentes en surbrillance
+
+      for(var i = 0; i < adjacences[parseInt($(this).attr('id'))].length; i++){
+        $('#'+adjacences[parseInt($(this).attr('id'))][i]).attr('class','glow-animation');
+      }
   },
   mouseleave: function () {
     $(this).css('filter', '').css('stroke', stroke_color);
+    for(var i = 0; i < adjacences[parseInt($(this).attr('id'))].length; i++){
+      $('#'+adjacences[parseInt($(this).attr('id'))][i]).attr('class','');
+    }
   }
 });
 
