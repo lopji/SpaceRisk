@@ -53,7 +53,7 @@ class Player {
 
     public function checkObjectives() {
         foreach ($this->objectives as $objective) {
-            if(!$objective->check){
+            if(!$objective->check()){
                 return FALSE;
             }
         }
