@@ -53,7 +53,7 @@ class Player {
 
     public function checkObjectives() {
         foreach ($this->objectives as $objective) {
-            if(!$objective->check()){
+            if (!$objective->check()) {
                 return FALSE;
             }
         }
@@ -80,6 +80,10 @@ class Player {
         return $this->lose;
     }
 
+    public function lose() {
+        $this->lose = TRUE;
+    }
+
     public function getState() {
         return $this->state;
     }
@@ -99,11 +103,11 @@ class Player {
     public function getColor() {
         return $this->color;
     }
-    
-    public function getTime(){
+
+    public function getTime() {
         return $this->time;
     }
-    
+
     public function getObjectives() {
         $array = [];
         foreach ($this->objectives as $objective) {
@@ -115,11 +119,11 @@ class Player {
     public function getTroop() {
         return $this->troop;
     }
-    
+
     public function setTroop($troop) {
         $this->troop = $troop;
     }
-    
+
     public function assignTroop($nbTerritory, $nbSysSolaire) {
         //TODO: Prendre en compte le bonus du nombre de système solaire
         //      Prevoir de prendre en compte quel système solaire on aurait
@@ -129,8 +133,8 @@ class Player {
     public function setState($state) {
         $this->state = $state;
     }
-    
-    public function setTime($time){
+
+    public function setTime($time) {
         $this->time = $time;
     }
 
