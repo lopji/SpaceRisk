@@ -262,7 +262,7 @@ $('#layer3 ellipse').on({
       if (move_first) {
         var content = '<div class="select"><select id="sel-move-from" class="form-control">';
         tr = $('#lblTrpPlnt' + $(this).attr('id')).text();
-        for (var i = 1; i <= tr; i++) {
+        for (var i = 1; i < tr; i++) {
           content += '<option value="' + i + '">' + i + '</option>';
         }
         content += "</select><button type='button' id='btnSendMoveFrom' class='btn btn-primary'" +
@@ -291,7 +291,7 @@ $('#layer3 ellipse').on({
       if (move_first) {
         var content = '<div class="select"><select id="sel-attack_from" class="form-control">';
         tr = $('#lblTrpPlnt' + $(this).attr('id')).text();
-        for (var i = 1; i <= tr; i++) {
+        for (var i = 1; i < tr; i++) {
           content += '<option value="' + i + '">' + i + '</option>';
         }
         content += "</select><button type='button' id='btnSendAttackFrom' class='btn btn-primary'" +
