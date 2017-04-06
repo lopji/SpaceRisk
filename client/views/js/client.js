@@ -56,10 +56,6 @@ function format(type, data) {
   return [type, data];
 }
 
-function checkTitle() {
-  return document.title === "RISK";
-}
-
 function init() {
   var host = "ws://127.0.0.1:666"; // SET THIS TO YOUR SERVER
   try {
@@ -67,7 +63,7 @@ function init() {
     console.log('WebSocket - status ' + socket.readyState);
     socket.onopen = function (msg) {
       console.log("Welcome - status " + this.readyState);
-      send(format(0, Math.round(Math.random() * 100)));
+      send(format(0, '{id}'));
     };
     socket.onmessage = function (msg) {
       console.log("Received: " + msg.data);
@@ -85,6 +81,7 @@ function init() {
         break;
         //List player
         case 3:
+        $('#joueurs').empty();
         data[1].forEach(function (ps) {
           switch(ps[0]){
             case "#ffff00":
@@ -138,13 +135,6 @@ function init() {
             $('#lblTrpPlnt' + planet[0]).html(planet[2]);
           });
         }
-        if (checkTitle()) {
-          data[1].forEach(function (ps) {
-            if (ps[1] === true) {
-              document.title = "Player " + ps[0] + " - " + document.title;
-            }
-          });
-        }
         break;
         // Chat
         case 7:
@@ -188,6 +178,12 @@ function init() {
           function () {
             $(location).attr('href', 'http://127.0.0.1/SpaceRisk/client/');
           }, 1000 * 10);
+          break;
+       case 11:
+          if ($("#logs > tr").length === 10) {
+            $('#logs').find('tr').first().remove();
+          }
+          $('#logs').append("<tr><td>" + data[1] + "</td></tr>");
           break;
       }
     };

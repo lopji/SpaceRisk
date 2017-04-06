@@ -2,6 +2,7 @@
 
 require_once('../serveur/library/websocket/websockets.php');
 require_once('../serveur/class/controller/instance.php');
+require_once('../serveur/class/controller/sql.php');
 
 class Server extends WebSocketServer {
 
@@ -14,17 +15,22 @@ class Server extends WebSocketServer {
 
     protected function process($user, $message) {
         $data = json_decode($message);
+        $sql = new sql();
         switch ($data[0]) {
             //Client login
             case 0:
                 $this->stdout("Client login");
                 $player = $this->instance->login($user, $data[1]);
                 if ($player != NULL) {
-                    $this->send($user, json_encode(array(3, $this->instance->getPlayers())));
+                    $pseudo = $sql->query("select * from user where idUser = " . $data[1])[0]["pseudo"];
+                    $player->setPseudo($pseudo);
                     $this->send($user, json_encode(array(4, $player->getState())));
                     $this->send($user, json_encode(array(5, $player->getTroop())));
                     $this->send($user, json_encode(array(8, $player->getObjectives())));
                     $this->send($user, json_encode(array(6, $this->instance->getViewTerritorysByPlayer($player))));
+                    foreach ($this->users as $u) {
+                        $this->send($user, json_encode(array(3, $this->instance->getPlayers())));
+                    }
                 } else {
                     $this->send($user, json_encode(array(2)));
                 }
@@ -52,7 +58,7 @@ class Server extends WebSocketServer {
                     }
                     if ($this->instance->finish) {
                         foreach ($this->users as $u) {
-                            $this->send($u, json_encode(array(10, "Lopji")));
+                            $this->send($u, json_encode(array(10)));
                         }
                         exit();
                     }
@@ -67,6 +73,7 @@ class Server extends WebSocketServer {
                     foreach ($this->users as $u) {
                         $p = $this->instance->getPlayerByUser($u);
                         $this->send($u, json_encode(array(6, $this->instance->getViewTerritorysByPlayer($p))));
+                        $this->send($u, json_encode(array(11, "Le joueur " . $player->getPseudo() . " déploie " . $data[1][1] . " troupes.")));
                     }
                 }
                 break;
@@ -87,6 +94,7 @@ class Server extends WebSocketServer {
                     foreach ($this->users as $u) {
                         $p = $this->instance->getPlayerByUser($u);
                         $this->send($u, json_encode(array(6, $this->instance->getViewTerritorysByPlayer($p))));
+                        $this->send($u, json_encode(array(11, "Le joueur " . $player->getPseudo() . " déplace " . $data[1][2] . " troupes.")));
                     }
                 }
                 break;
@@ -98,6 +106,7 @@ class Server extends WebSocketServer {
                     foreach ($this->users as $u) {
                         $p = $this->instance->getPlayerByUser($u);
                         $this->send($u, json_encode(array(6, $this->instance->getViewTerritorysByPlayer($p))));
+                        $this->send($u, json_encode(array(11, "Le joueur " . $player->getPseudo() . " attaque un territoire avec " . $data[1][2] . " troupes.")));
                     }
                 }
                 break;

@@ -35,7 +35,18 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-8">
+
+                <div class="col-md-2">
+                    <div class="sidebar-module" id="allChat">
+                        <h4>Logs</h4>
+                        
+                        <table id="logs" class="table table-striped">
+
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-md-7">
                     <div id="plateau">
                         {plateau}
                     </div>
@@ -62,7 +73,7 @@
                 </div>
 
 
-                <div class="col-md-3 col-md-offset-1 blog-sidebar">
+                <div class="col-md-3  blog-sidebar">
                     <div class="sidebar-module">
                         <h4>Objectifs</h4>
                         <div  class="bg-success">
@@ -152,7 +163,9 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="./views/js/bootstrap.min.js"></script>
-    <script src="./views/js/client.js"></script>
+    <script>
+    {client}
+    </script>
     <!-- Mini Game -->
     <script src='./views/js/three.min.js'></script>
     <script src='./views/js/keyboard.js'></script>

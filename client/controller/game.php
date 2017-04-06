@@ -24,7 +24,9 @@ class game extends prefab {
 
     public function index() {
         $parser = new parser();
+        $this->data["id"] = $this->user->getId(); 
         $this->data["plateau"] = file_get_contents('./views/ressources/map/svg.php');
+        $this->data["client"] = $parser->parse(file_get_contents("./views/js/client.js"),  $this->data);
         $file = $parser->logged(file_get_contents("./views/pages/game.html"), $this->user->isLogin());
         return $parser->parse($file, $this->data);
     }

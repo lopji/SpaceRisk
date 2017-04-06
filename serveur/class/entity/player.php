@@ -123,6 +123,10 @@ class Player {
     public function setTroop($troop) {
         $this->troop = $troop;
     }
+    
+    public function setPseudo($pseudo){
+        $this->pseudo = $pseudo;
+    }
 
     public function assignTroop($nbTerritory, $nbSysSolaire) {
         //TODO: Prendre en compte le bonus du nombre de système solaire
