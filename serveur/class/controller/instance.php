@@ -8,7 +8,7 @@ class Instance {
 
     private $config;
     private $player;
-    private $step;
+    private $step; 
     private $players = array();
     private $territorys = array();
     private $attacks = array();
