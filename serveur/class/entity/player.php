@@ -5,7 +5,7 @@ class Player {
     const DEFAULT_TROOPS = 20;
 
     private $id;
-    private $user;
+    private $user = [];
     private $connected;
     private $state;
     private $troop;
@@ -17,7 +17,6 @@ class Player {
 
     public function __construct($pseudo, $color) {
         $this->id = -1;
-        $this->user = null;
         $this->connected = FALSE;
         $this->lose = FALSE;
         $this->state = 5;
@@ -29,12 +28,11 @@ class Player {
 
     public function login($id, $user) {
         $this->id = $id;
-        $this->user = $user;
+        array_push($this->user, $user);
         $this->connected = TRUE;
     }
 
     public function logout() {
-        $this->user = null;
         $this->connected = FALSE;
     }
 
@@ -61,7 +59,12 @@ class Player {
     }
 
     public function checkUser($user) {
-        return $this->user->id == $user->id;
+        foreach ($this->user as $u){
+            if($u->id == $user->id){
+                return TRUE;
+            }
+        }
+        return FALSE;
     }
 
     public function checkId($id) {

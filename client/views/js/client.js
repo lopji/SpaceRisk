@@ -180,7 +180,7 @@ function init() {
           }, 1000 * 10);
           break;
        case 11:
-          if ($("#logs > tr").length === 10) {
+          if ($("#logs > tr").length >= 5) {
             $('#logs').find('tr').first().remove();
           }
           $('#logs').append("<tr><td>" + data[1] + "</td></tr>");
