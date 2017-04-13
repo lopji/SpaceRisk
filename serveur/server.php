@@ -133,7 +133,7 @@ class Server extends WebSocketServer {
     }
 
     protected function connected($user) {
-        
+
     }
 
     protected function closed($user) {

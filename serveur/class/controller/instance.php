@@ -8,7 +8,7 @@ class Instance {
 
     private $config;
     private $player;
-    private $step; 
+    private $step;
     private $players = array();
     private $territorys = array();
     private $attacks = array();
@@ -190,12 +190,8 @@ class Instance {
     public function login($user, $id) {
         foreach ($this->players as $player) {
             if ($player->checkId($id)) {
-                if (!$player->isConnected()) {
-                    $player->login($id, $user);
-                    return $player;
-                } else {
-                    return $player;
-                }
+                $player->login($id, $user);
+                return $player;
             }
         }
         return NULL;
